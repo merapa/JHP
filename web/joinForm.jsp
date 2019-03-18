@@ -53,7 +53,7 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 	</tr>
 	<tr>
 		<td><label for = "pass">비밀번호 : </label></td>
-		<td><input type="password" name="pass" id = "pass" /></td>
+		<td><input type="password" name="pass" id = "pass"/></td>
 	</tr>
 
 	<tr>
@@ -62,7 +62,7 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 	</tr>
 	<tr>
 		<td><label for = "age">나이 : </label></td>
-		<td><input type="text" name="age" id = "age" />
+		<td><input type="text" name="age" id = "age"/>
 		</td>
 	</tr>
 	<tr>
