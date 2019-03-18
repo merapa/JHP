@@ -24,7 +24,7 @@
 		<tr>
 			<td colspan="2"><input type="submit" value="로그인"> </td>
 		<tr>
-			<td colspan="2"><input type="submit" value="회원가입" onclick="location.href='joinForm.jsp'">	
+			<td colspan="2"><input type="button" onclick="location.href='joinForm.jsp'" value="회원가입" >		
 		</tr>
 		<tr>
 		<td colspan="2"><input type="button" value="돌아가기" onclick="location.href='index.html'">
