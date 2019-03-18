@@ -88,8 +88,8 @@
 				<div class="login-container">
 					<form action="loginForm.jsp">
 						<h4 align="right"><%=id%> 님 환영합니다.</h4>
-						<h4 align="right"><button type="submit" onclick=" " >내 정보</button></h4>
-						<h4 align="right"><button type="submit">로그아웃</button></h4>
+						<h4 align="right"><input type="button" onclick="location.href='Boardinfo.jsp'" value="내 정보" ></button></h4>
+						<h4 align="right"><input type="button" onclick="location.href='loginForm.jsp'" value="로그아웃"></button></h4>
 					</form>
 				</div>
 			</div>
