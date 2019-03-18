@@ -82,6 +82,7 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 		<input type="button" value="다시 작성"  onclick="location.href='joinForm.jsp'"> &nbsp;
 		<input type="button" value="돌아가기"  onclick="location.href='loginForm.jsp'"> &nbsp;
 	</td>
+	</tr>
 </table>
 </form>
 </body>
