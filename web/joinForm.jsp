@@ -5,7 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원관리 시스템 회원가입 페이지</title>
-<style>
+
+<style type="text/css" >
+
+	a.no-uline {text-decoration:none}
+
 	table{
 		margin : auto;
 		width : 400px;
@@ -18,7 +22,23 @@
 	}
 </style>
 </head>
+
+<!-- <Script type="text/javaScript">
+function check_onclick(){
+	theForm=document.frm1;
+
+if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm.age.Value==""||theForm.email.Value==""){
+	alert("빈공간 을 확인해주세요");
+}else{
+	alert("회원 가입 성공")
+	}
+}
+</Script> -->
+
+
 <body>
+
+
 <form name="joinform" action="joinProcess.jsp" method="post">
 <table border=1>
 	<tr>
@@ -29,18 +49,20 @@
 	<tr>
 		<td><label for = "id">아이디 : </label></td>
 		<td><input type="text" name="id" id = "id"/></td>
+
 	</tr>
 	<tr>
 		<td><label for = "pass">비밀번호 : </label></td>
-		<td><input type="password" name="pass" id = "pass"/></td>
+		<td><input type="password" name="pass" id = "pass" /></td>
 	</tr>
+
 	<tr>
 		<td><label for = "name">이름 : </label></td>
 		<td><input type="text" name="name" id = "name"/></td>
 	</tr>
 	<tr>
 		<td><label for = "age">나이 : </label></td>
-		<td><input type="text" name="age" id = "age"/>
+		<td><input type="text" name="age" id = "age" />
 		</td>
 	</tr>
 	<tr>
@@ -55,11 +77,11 @@
 		<td><input type="text" name="email" id = "email"/></td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<a href="javascript:joinform.submit()">회원가입</a>&nbsp;&nbsp;
-			<a href="javascript:joinform.reset()">다시작성</a>
-		</td>
-	</tr>
+	<td colspan=2> 
+		<input type="button" value="회원 가입"  onclick="location.href='joinProcess.jsp'"> &nbsp;
+		<input type="button" value="다시 작성"  onclick="location.href='joinForm.jsp'"> &nbsp;
+		<input type="button" value="돌아가기"  onclick="location.href='loginForm.jsp'"> &nbsp;
+	</td>
 </table>
 </form>
 </body>
