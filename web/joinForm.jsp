@@ -34,12 +34,10 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 	}
 }
 </Script> -->
-
-
 <body>
 
 
-<form name="joinform" action="joinProcess.jsp" method="post">
+<form name="joinform" method="post">
 <table border=1>
 	<tr>
 		<td colspan="2" class = "td_title">
@@ -53,7 +51,7 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 	</tr>
 	<tr>
 		<td><label for = "pass">비밀번호 : </label></td>
-		<td><input type="password" name="pass" id = "pass"/></td>
+		<td><input type="password" name="pass" id = "pass" /></td>
 	</tr>
 
 	<tr>
@@ -62,7 +60,7 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 	</tr>
 	<tr>
 		<td><label for = "age">나이 : </label></td>
-		<td><input type="text" name="age" id = "age"/>
+		<td><input type="text" name="age" id = "age" />
 		</td>
 	</tr>
 	<tr>
@@ -78,9 +76,9 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 	</tr>
 	<tr>
 	<td colspan=2> 
-		<input type="button" value="회원 가입"  onclick="location.href='joinProcess.jsp'"> &nbsp;
-		<input type="button" value="다시 작성"  onclick="location.href='joinForm.jsp'"> &nbsp;
-		<input type="button" value="돌아가기"  onclick="location.href='loginForm.jsp'"> &nbsp;
+		<input type="button" value="회원 가입" onclick="location.href='joinProcess.jsp'">&nbsp;
+		<input type="button" value="다시 작성"  onclick="location.href='joinForm.jsp'">&nbsp;
+		<input type="button" value="돌아가기"  onclick="location.href='loginForm.jsp'">&nbsp;
 	</td>
 	</tr>
 </table>
