@@ -21,13 +21,10 @@
 			<td>비밀번호</td>
 			<td><input type="password" name="pass"></td>
 		</tr>
-		<tr>
-			<td colspan="2"><input type="submit" value="로그인"> </td>
-		<tr>
-			<td colspan="2"><input type="button" onclick="location.href='joinForm.jsp'" value="회원가입" >		
-		</tr>
-		<tr>
-		<td colspan="2"><input type="button" value="돌아가기" onclick="location.href='index.html'">
+		<td colspan="2">
+			<input type="submit" value="로그인"> 
+			<input type="button" onclick="location.href='joinForm.jsp'" value="회원가입" >	
+			<input type="button" value="돌아가기" onclick="location.href='index.html'">
 		</td>
 
 		<!-- <a href = "#"> 적을내용 </a>  이렇게 링크 형식 or 버튼형식으로 바꿀 예정. ( 틀 짜놓고 어느 방향으로 갈지 수정 준비 중 ) -->
