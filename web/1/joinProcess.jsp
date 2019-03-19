@@ -17,7 +17,7 @@
 	
 	try {
   		Context init = new InitialContext();
-  		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/jhp");  // 데이터 베이스 서버에 맞춰야할 부분
+  		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/jhp");  // 서버.xml 네임 뒤쪽 에 맞춰야할 부분
   		conn = ds.getConnection();
   		
   		pstmt=conn.prepareStatement("INSERT INTO member VALUES (?,?,?,?)");
