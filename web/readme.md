@@ -2,7 +2,7 @@ ex) INSERT INTO member VALUES (?,?,?,?)
 
 		위 인서트	member 의 뜻은  테이블
 
-		name = "jdbc/jhp" jhp 아이디
+		name = "jdbc/jhp" 
 		auth = "Container"
 		type = "javax.sql.DataSource"
 		username = "zerock"		오라클 id
