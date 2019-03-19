@@ -5,11 +5,16 @@
 <%@ page import="javax.naming.*" %>
 <%
 	request.setCharacterEncoding("UTF-8");
-
+	
 	String id=request.getParameter("id");
 	String pass=request.getParameter("pass");
 	String contact=request.getParameter("contact");
 	String email=request.getParameter("email");
+	
+/* 	System.out.println(id);
+	System.out.println(pass);
+	System.out.println(contact);
+	System.out.println(email); */
 	
 	Connection conn=null;
 	PreparedStatement pstmt=null;
