@@ -19,6 +19,60 @@
 		font-weight: bold;
 		font-size: x-large;
 	}
+	
+	.cities {
+  background-color: black;
+  color: white;
+  margin: 1px;
+  padding: 1px;
+} 
+
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+.cities {
+  background-color: black;
+  color: white;
+  margin: 1px;
+  padding: 1px;
+} 
+
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+	
+	
+	
 </style>
 </head>
 
@@ -36,7 +90,7 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 <body>
 
 
-<form name="joinform" method="post">
+<form action="joinProcess.jsp" method="post">
 <table border=1>
 	<tr>
 		<td colspan="2" class = "td_title">
@@ -45,12 +99,12 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 	</tr>
 	<tr>
 		<td><label for = "id">아이디 : </label></td>
-		<td><input type="text" name="id" id = "id"/></td>
+		<td><input type="text" name="id" id = "id"/>
 
 	</tr>
 	<tr>
 		<td><label for = "pass">비밀번호 : </label></td>
-		<td><input type="password" name="pass" id = "pass" /></td>
+		<td><input type="password" name="pass" id = "pass" />
 	</tr>
 	<tr>
 		<td><label for = "contact">전화 번호 : </label></td>
@@ -59,74 +113,17 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 	</tr>
 	<tr>
 		<td><label for = "email">이메일 주소 : </label></td>
-		<td><input type="text" name="email" id = "email"/></td>
+		<td><input type="text" name="email" id = "email"/>
 	</tr>
 	<tr>
 	<td colspan=2> 
-		<input type="button" value="회원 가입" onclick="location.href='joinProcess.jsp'">&nbsp;
+		<input type="submit" value="회원 가입" >&nbsp;
 		<input type="button" value="다시 작성"  onclick="location.href='joinForm.jsp'">&nbsp;
 		<input type="button" value="돌아가기"  onclick="location.href='loginForm.jsp'">&nbsp;
 	</td>
 	</tr>
 </table>
 </form>
-
-<style>
-
-
-.cities {
-  background-color: black;
-  color: white;
-  margin: 1px;
-  padding: 1px;
-} 
-
-
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-
-.cities {
-  background-color: black;
-  color: white;
-  margin: 1px;
-  padding: 1px;
-} 
-
-
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-
-</style>
 </head>
 <body>
 
