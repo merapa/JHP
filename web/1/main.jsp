@@ -1,18 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  
+  <style type="text/css">
+	a.no-uline {text-decoration:none}
+  
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<head>
+	
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Basic CSS -->
+        <link rel="stylesheet" href="css/basic.css">
+		
+		<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        
+        <!-- jQuery library -->
+        <script src="js/jquery-3.3.1.min.js"></script>
+        
+        <!-- Latest compiled JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        
+        
+<style>
 
-<style type="text/css">
-	a.no-uline {text-decoration:none}
-</style>
-
+	<head>
+		<meta charset="utf-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Basic CSS -->
+        <link rel="stylesheet" href="css/basic.css">
+		
+		<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        
+        <!-- jQuery library -->
+        <script src="js/jquery-3.3.1.min.js"></script>
+        
+        <!-- Latest compiled JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+		
+		
+		
+		<style>
+			h1 {
+				color: #ffffff;
+			}
+			h2 {
+				color: #ECF7D5;
+			}
+			h3 {
+				color: #91AA9D;
+			}
+			h3.a {
+				color: #ECF7D5;
+			}
+			h4 {
+				color: #ffffff;
+			}
+			h5 {
+				color: #ffffff;
+				height: 35px;
+				/*Basically, the H-tag has a margin and padding */
+				margin: 0;
+	  			padding: 0;
+	  			vertical-align: middle; /*middle centred*/
+	  			display:table-cell; /*acts like a table cell*/
+			}
+			p {
+				color: #D3E0E0;
+				font-size: 18px;
+			}
+			p.a {
+				color: #D3E0E0;
+				font-size: 14px;
+			}
+		</style>
+	</head>
 <html>
 <body>
 
-<div class="cities">
-  <h2>HTML List1</h2>
-  <p> test is jiwon.</p>
+
+<div class="container">
+			<a href="index_login.jsp" class="no-uline" ><h1>UHMS<small> Underwater Homeostatic Maintenance System </small></h1></a>
+			<h3>수중생태 항상성 유지 시스템</h3>
 </div>
 
 <% String id =(String)session.getAttribute("id");
