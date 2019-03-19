@@ -53,7 +53,7 @@ if(theForm.id.value==""||theForm.pass.Value==""||theForm.name.Value==""||theForm
 		<td><input type="password" name="pass" id = "pass" /></td>
 	</tr>
 	<tr>
-		<td><label for = "age">전화 번호 : </label></td>
+		<td><label for = "">전화 번호 : </label></td>
 		<td><input type="text" name="contact" id = "contact" />
 		</td>
 	</tr>
