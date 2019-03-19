@@ -1,6 +1,6 @@
 ex) INSERT INTO member VALUES (?,?,?,?) 
 
-		member 안에 들어갈건 테이블
+		위 인서트	member 의 뜻은  테이블
 
 		name = "jdbc/jhp" jhp 아이디
 		auth = "Container"
