@@ -93,12 +93,12 @@
 			<!-- login form end-->
 			
 			<div class="row" align="center">
-				<div class="col-sm-2" style="background-color:#3E606F"><a href="light.html"><h5>조명</h5></a></div>
-				<div class="col-sm-2" style="background-color:#12252E"><a href="heat.html"><h5>히터</h5></a></div>
-				<div class="col-sm-2" style="background-color:#3E606F"><a href="cooling.html"><h5>쿨러</h5></a></div>
-				<div class="col-sm-2" style="background-color:#12252E"><a href="waterlevel.html"><h5>수위보충</h5></a></div>
-				<div class="col-sm-2" style="background-color:#3E606F"><a href="feed.html"><h5>먹이자동급여</h5></a></div>
-				<div class="col-sm-2" style="background-color:#12252E"><a href="list.html"><h5>수조목록</h5></a></div>
+				<div class="col-sm-2" style="background-color:#3E606F"><a href="light.jsp"><h5>조명</h5></a></div>
+				<div class="col-sm-2" style="background-color:#12252E"><a href="heat.jsp"><h5>히터</h5></a></div>
+				<div class="col-sm-2" style="background-color:#3E606F"><a href="cooling.jsp"><h5>쿨러</h5></a></div>
+				<div class="col-sm-2" style="background-color:#12252E"><a href="waterlevel.jsp"><h5>수위보충</h5></a></div>
+				<div class="col-sm-2" style="background-color:#3E606F"><a href="feed.jsp"><h5>먹이자동급여</h5></a></div>
+				<div class="col-sm-2" style="background-color:#12252E"><a href="list.jsp"><h5>수조목록</h5></a></div>
 			
 			</div>
 		</div>
