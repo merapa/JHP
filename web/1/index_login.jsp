@@ -70,7 +70,7 @@
 		</style>
 	</head>
 	
-	<body style="background-color:#193441">
+		<body style="background-color:#193441">>
 		<!-- container start-->
 		<div class="container">
 			<a href="index_login.jsp" class="no-uline" ><h1>UHMS<small> Underwater Homeostatic Maintenance System </small></h1></a>
@@ -83,6 +83,10 @@
 						<h4 align="right"><%=id%> 님 환영합니다.</h4>
 						<h4 align="right"><input type="button" onclick="location.href='Boardinfo.jsp'" value="내 정보" ></h4>
 						<h4 align="right"><input type="button" onclick="location.href='loginForm.jsp'" value="로그아웃"></h4>
+						<% if(id.equals("aaa")){
+						%>
+						<h4 align="right"><input type="button" onclick="location.href='member_list.jsp'" value="관리자 메뉴"></h4></a><br>
+						<%}%>
 					</form>
 				</div>
 			</div>
