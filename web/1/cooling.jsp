@@ -64,7 +64,7 @@
 <body style="background-color:#193441">
 <!-- container start-->
 		<div class="container">
-			<a href="index_login.html" class="no-uline" ><h1>UHMS<small> Underwater Homeostatic Maintenance System </small></h1></a>
+			<a href="index_login.jsp" class="no-uline" ><h1>UHMS<small> Underwater Homeostatic Maintenance System </small></h1></a>
 			<h3>수중생태 항상성 유지 시스템</h3>
 			
 			<!-- login form start-->
