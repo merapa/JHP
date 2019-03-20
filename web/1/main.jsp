@@ -95,13 +95,14 @@
 <a href="index_login.jsp" > 서버 접속 </a> &nbsp;&nbsp;&nbsp;
 <a href="index.html"> 나가기 </a> <br>
 <br>
+	
 <% if(id.equals("aaa")){
 %>
 관리자님 로그인 하신것을 환영합니다 <br><br>
-<a href="member_list.jsp">회원 목록 보기</a><br>
 <%}%>
 
 <br></br>
+
 
 <ol>
 <h2 id="C1"> </h2>
