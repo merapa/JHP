@@ -101,8 +101,8 @@
 		
 		<!-- list start-->
 		<div class="container" style="background-color:#12252E">
-			<h3 class="a">조명</h3>
-			<p class="a"> 조명의 점등/소등 시간을 설정할 수 있습니다. </p>
+			<h3 class="a">수조목록</h3>
+			<p class="a"> 여러개의 수조를 등록하여 관리할수 있습니다. </p>
 		</div>
 		
 		<div style="height: 890px">
@@ -113,6 +113,7 @@
 		<br>
 		<br>
 		<br>
+		
 		
 
 </body>
