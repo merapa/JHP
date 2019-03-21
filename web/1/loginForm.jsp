@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<style type="text/css" >
 
+	a.no-uline {text-decoration:none} 
+</style>
 
 </head>
 <body>
@@ -27,15 +30,19 @@
 			<input type="submit" value="로그인"> 
 			<input type="button" onclick="location.href='joinForm.jsp'" value="회원가입" >	
 			<input type="button" value="돌아가기" onclick="location.href='index.html'">
-		</td>
-
+			<script type="text/javascript">
+		function popupOpen(){
+		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+			window.open(popUrl,"",popOption);
+		}
+	</script>
+	<br><br>
+	<span class="psw">Forgot <a href="ForgetCheck.html" class="no-uline">password?</a></span>
+		</td>	
 		<!-- <a href = "#"> 적을내용 </a>  이렇게 링크 형식 or 버튼형식으로 바꿀 예정. ( 틀 짜놓고 어느 방향으로 갈지 수정 준비 중 ) -->
 		
 	</table>
 
 </form>
-
-
-
 </body>
 </html>
