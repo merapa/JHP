@@ -32,12 +32,13 @@
 			<input type="button" value="돌아가기" onclick="location.href='index.html'">
 			<script type="text/javascript">
 		function popupOpen(){
+		var popUrl = "ForgetCheck.html" ;
 		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
 			window.open(popUrl,"",popOption);
 		}
 	</script>
 	<br><br>
-	<span class="psw">Forgot <a href="ForgetCheck.html" class="no-uline">password?</a></span>
+	Forget <a href="javascript:popupOpen();" >password?</a>
 		</td>	
 		<!-- <a href = "#"> 적을내용 </a>  이렇게 링크 형식 or 버튼형식으로 바꿀 예정. ( 틀 짜놓고 어느 방향으로 갈지 수정 준비 중 ) -->
 		
@@ -45,4 +46,3 @@
 
 </form>
 </body>
-</html>
