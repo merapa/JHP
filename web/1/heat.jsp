@@ -101,8 +101,8 @@
 		
 		<!-- list start-->
 		<div class="container" style="background-color:#12252E">
-			<h3 class="a">조명</h3>
-			<p class="a"> 조명의 점등/소등 시간을 설정할 수 있습니다. </p>
+			<h3 class="a">히터</h3>
+			<p class="a"> 히터의 작동 온도를 설정할 수 있습니다. </p>
 		</div>
 		
 		<div style="height: 890px">
