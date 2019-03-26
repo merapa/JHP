@@ -22,7 +22,7 @@ try
 	Connection conn=null;
 	PreparedStatement pstmt=null;
 	ResultSet rs=null;
-	String sql = "SELECT * FROM MEMBER WHERE ID = ?";
+	String sql = "select * from member where id = ?";
 	 
     pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1,id);
