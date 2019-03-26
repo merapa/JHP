@@ -20,7 +20,7 @@ public class HttpsServer {
     
     // Start to run the server
     public void run(){
-        SSLContext sslContext = new SSLGenerator("JKS","test.jks","passphrase","SunX509","TLSv1.2").createSSLContext();
+        SSLContext sslContext = new SSLGenerator("JKS","test1.jks","password1","SunX509","TLSV1.2").createSSLContext();
          
         try{
             // Create server socket factory
