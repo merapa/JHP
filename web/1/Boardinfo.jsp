@@ -23,10 +23,13 @@
 </head>
 <body>
  	<form action="index_login.jsp" method="post">
-		<h4 align="left"><%=id%> 님 정보.</h4>				
+		<h4 align="left"><%=id%> 님 정보.</h4>	
+		<input type="button" onclick="location.href='Update_Member.jsp'" value="정보 수정">
+		<input type="button" onclick="location.href='loginForm.jsp'" value="로그아웃">
 		<input type="button" onclick="location.href='index_login.jsp'" value="돌아가기">
-	</form>
+	</form><br>
 	
+
 	
 	
  	
