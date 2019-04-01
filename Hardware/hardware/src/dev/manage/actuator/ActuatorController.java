@@ -1,17 +1,14 @@
 package dev.manage.actuator;
 
-import java.util.*;
-
 import com.pi4j.io.gpio.Pin;
-
 import dev.manage.Controller;
 
 public class ActuatorController implements Controller {
+	
+	public Actuator actuator;
 
 	public ActuatorController() {
 	}
-	
-	public Actuator actuator;
 
 	@Override
 	public void init(Pin pin) {

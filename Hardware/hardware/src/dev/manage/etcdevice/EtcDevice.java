@@ -1,26 +1,24 @@
 package dev.manage.etcdevice;
 
-import java.util.*;
+import com.pi4j.io.gpio.Pin;
 
 public class EtcDevice {
 
+	public int[] parameterInputData;
+	private String cMessage = null;
+
 	public EtcDevice() {
 	}
-
-	public String cMessage = null;
-	public boolean runFlag = false;
-	public List<Integer> data;
-
-
-	public void init() {
+	
+	public void setEtcDevice(Pin pin, int[] paramData) {
+		
+	}
+	
+	public void turnOn() {
 		// TODO implement here
 	}
 
-	public void execute() {
-		// TODO implement here
-	}
-
-	public void stop() {
+	public void turnOff() {
 		// TODO implement here
 	}
 

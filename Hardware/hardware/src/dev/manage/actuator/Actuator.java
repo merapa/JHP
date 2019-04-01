@@ -1,20 +1,21 @@
 package dev.manage.actuator;
 
-import java.util.*;
-
 public class Actuator {
 
 	public Actuator() {
 	}
 
-	public String cMessage = null;
+	public int[] parameterInputData;
 
-
-	public void init() {
+	public void setActuator() {
 		// TODO implement here
 	}
 
-	public void operate() {
+	public void rotate() {
+		// TODO implement here
+	}
+
+	public void init() {
 		// TODO implement here
 	}
 

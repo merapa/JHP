@@ -1,24 +1,26 @@
 package dev.manage.sensor;
 
-import java.util.*;
+import com.pi4j.io.gpio.Pin;
 
 public class Sensor {
 
-	public Sensor() {
-	}
-
+	public int[] parameterInputData;
+	public int[] parameterResultData;
 	public String cMessage = null;
 
-	public boolean runFlag = false;
-
-	public List<Integer> data;
-
-
-	public void init() {
-		// TODO implement here
+	public Sensor() {
+	}
+	
+	public void setSensor(Pin pin, int[] paramData) {
+		
 	}
 
-	public void getData() {
+	public int getData() {
+		// TODO implement here
+		return 0;
+	}
+
+	public void stop() {
 		// TODO implement here
 	}
 

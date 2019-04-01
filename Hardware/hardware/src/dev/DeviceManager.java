@@ -1,32 +1,25 @@
 package dev;
 
-import java.util.*;
-
 public class DeviceManager {
 
 	public DeviceManager() {
 	}
 
-	private List<DeviceInfo> deviceInfo;
-
-//	public void MessageSender;
-
-//	public void MessegeRecevier;
+	private DeviceInfo[] deviceInfo;
 
 	public static void main() {
-		// TODO implement here
+		
 	}
 
 	public void initDevice() {
-		// TODO implement here
+		this.deviceInfo = new DeviceInfo[5];
+		for(int i=0; i<5; i++) {
+			this.deviceInfo[i] = new DeviceInfo();
+		}
 	}
 
-	public void sendDataToDB() {
-		// TODO implement here
-	}
-
-	public void sendMessageToServer() {
-		// TODO implement here
+	public void commandOperate(int index, int[] ectParam) {
+		
 	}
 
 }

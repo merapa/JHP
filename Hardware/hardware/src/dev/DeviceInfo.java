@@ -1,62 +1,55 @@
 package dev;
 
-import java.util.*;
-
 import com.pi4j.io.gpio.Pin;
 import dev.manage.Controller;
-import dev.manage.actuator.ActuatorController;
-import dev.manage.etcdevice.EtcDeviceController;
-import dev.manage.sensor.SensorController;
+import dev.manage.actuator.Actuator;
+import dev.manage.etcdevice.EtcDevice;
+import dev.manage.sensor.Sensor;
 
-public abstract class DeviceInfo {
+public class DeviceInfo {
 
 	public DeviceInfo() {
 	}
+
 	private String deviceFuncName;
 	private String deviceModuleName;
 	private Pin gpioPin;
-
-	private EtcDeviceController etcDevice = null;
-	private SensorController sensor = null;
-	private ActuatorController actuator = null;
-
-	private Controller controller;
+	private Controller controllInfo;
+	public EtcDevice etcDevice;
+	public Sensor sensor;
+	public Actuator actuator;
 
 
 	public String getDeviceFuncName() {
-		// TODO implement here
-		return "";
+		return this.deviceFuncName;
 	}
 
 	public void setDeviceFuncName(String name) {
-		// TODO implement here
+		
 	}
 
 	public String getDeviceModuleName() {
-		// TODO implement here
-		return "";
+		return this.deviceModuleName;
 	}
 
 	public void setDeviceModuleName(String name) {
-		// TODO implement here
+		
 	}
 
 	public Pin getGpioPin() {
-		// TODO implement here
-		return null;
+		return this.gpioPin;
 	}
 
 	public void setGpioPin(Pin pin) {
-		// TODO implement here
+		
 	}
 
 	public Controller getControllInfo() {
-		// TODO implement here
-		return null;
+		return this.controllInfo;
 	}
 
 	public void setControllInfo(String command) {
-		// TODO implement here
+		
 	}
 
 }
