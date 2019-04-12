@@ -16,9 +16,9 @@ public class MemberDAO {
 
 	public MemberDAO() {
 		
-		url="jdbc:mariadb://127.0.0.1:3307/jhp";
-		user="zerock";
-		pw="1234";
+		url="jdbc:mariadb://localhost:3306/JHP";
+		user="jhp";
+		pw="01230123";
 		
 		try{
 			Class.forName("org.mariadb.jdbc.Driver");
