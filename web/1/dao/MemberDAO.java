@@ -6,22 +6,23 @@ import model.*;
  
 public class MemberDAO {
 	
-	private Connection con;
-	private PreparedStatement ps;
-	private ResultSet rs;
+	private Connection con = null;
+	private PreparedStatement ps=null;
+	private ResultSet rs=null;
 	private String url;
 	private String user;
 	private String pw;
 	
+
 	public MemberDAO() {
+		
+		url="jdbc:mariadb://127.0.0.1:3307/jhp";
+		user="zerock";
+		pw="1234";
+		
 		try{
 			Class.forName("org.mariadb.jdbc.Driver");
-			con=null;
-			ps=null;
-			rs=null;
-			url="jdbc:mariadb://127.0.0.1:3307/jhp";
-			user="zerock";
-			pw="1234";
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +49,7 @@ public class MemberDAO {
 //    회원정보셋 데이터 추가하기
     public int insertMember(MemberDTO dto) throws SQLException{
     	try {
-        	String sql = "insert into member values (?,?,?,?,?,?,?)";
+        	String sql = "insert into member values (?,?,?,?,?,?,?, sysdate)";
             ps = con.prepareStatement(sql);
             ps.setString(1, dto.getid());
             ps.setString(2, dto.getpass());
