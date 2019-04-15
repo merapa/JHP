@@ -1,3 +1,10 @@
+JSP -> DAO DTO 사용 예정
+현재 수정중 = joinProcess.jsp 
+
+
+
+
+
 
 ex) INSERT INTO member VALUES (?,?,?,?) 
 
