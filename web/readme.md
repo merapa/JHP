@@ -1,4 +1,6 @@
-JHP Web 서버 소스코드  * Branch 확인 *
+* Branch 확인 *
+
+JHP Web 서버 소스코드  
 
 '1' 폴더
 
