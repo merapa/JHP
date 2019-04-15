@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Member;
 import service.MemberService;
 
+@SuppressWarnings("serial")
 public class MemberServlet extends HttpServlet {
     private MemberService service;
     public MemberServlet(){
