@@ -99,11 +99,13 @@ public class MemberServlet extends HttpServlet {
             else if(reqUri.equals(contextPath + "/memberUpdate.do"))
             {
             String id = req.getParameter("id");
-            String pw = req.getParameter("pw");
+            String pass = req.getParameter("pass");
             String name = req.getParameter("name");
             String email = req.getParameter("email");
             String contact = req.getParameter("contact");
-            service.update(id, pw, name, email,contact);
+            String question = req.getParameter("question");
+            String answer = req.getParameter("answer");
+            service.join(id, pass, name, email,contact,question,answer);
             resp.sendRedirect("main.do");
             return;
             }
