@@ -94,37 +94,30 @@ public class MemberDTO {
 	}
 
 	public String getid() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getpass() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getcontact() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getemail() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getname() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getquestion() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public String getanswer() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
