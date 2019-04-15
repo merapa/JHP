@@ -2,8 +2,9 @@ package dao;
 
 import java.sql.*;
 import java.util.*;
-import model.*;
- 
+import model.Member;
+
+
 public class MemberDAO {
 	
 	private Connection con = null;
@@ -16,9 +17,9 @@ public class MemberDAO {
 
 	public MemberDAO() {
 		
-		url="jdbc:mariadb://localhost:3306/JHP";
-		user="jhp";
-		pw="01230123";
+		url="jdbc:mariadb://localhost/jhp";
+		user="JHP";
+		pw="12345";
 		
 		try{
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -47,49 +48,51 @@ public class MemberDAO {
 	}
 //    dao 패키지에 있는 DTO 꺼 가져와서 쓰기
 //    회원정보셋 데이터 추가하기
-    public int insertMember(MemberDTO dto) throws SQLException{
+	
+    public void insertMember(Member member) throws Exception{
     	try {
-        	String sql = "insert into member values (?,?,?,?,?,?,?, sysdate)";
+        	String sql = "insert into user values (?,?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
-            ps.setString(1, dto.getid());
-            ps.setString(2, dto.getpass());
-            ps.setString(3, dto.getname());
-            ps.setString(4, dto.getcontact());
-            ps.setString(5, dto.getemail());
-            ps.setString(6, dto.getquestion());
-            ps.setString(7, dto.getanswer());
-            java.util.Date date = new java.util.Date();
-            int n=ps.executeUpdate();
-            return n;
+            ps.setString(1, member.getid());
+            ps.setString(2, member.getpass());
+            ps.setString(3, member.getname());
+            ps.setString(4, member.getcontact());
+            ps.setString(5, member.getemail());
+            ps.setString(6, member.getquestion());
+            ps.setString(7, member.getanswer());
+            ps.executeUpdate();
+    }catch(Exception e){
+    	e.printStackTrace();
     }finally{
-    	if(ps!=null) ps.close();
-    	if(con!=null) con.close();
+    	execClose(null,ps,con);
     }
     
   }
     
-    public void updateMember(MemberDTO dto)
+    public void updateMember(Member member)
     {
         String sql = "update user set pass=?, name=?, email=?,contact =? where id=?";
         PreparedStatement pstmt = null;
  
         try {
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, dto.getid());
-            pstmt.setString(2, dto.getpass());
-            pstmt.setString(3, dto.getname());
-            pstmt.setString(4, dto.getemail());
-            pstmt.setString(5, dto.getcontact());
+            ps.setString(1, member.getid());
+            ps.setString(2, member.getpass());
+            ps.setString(3, member.getname());
+            ps.setString(4, member.getcontact());
+            ps.setString(5, member.getemail());
+            ps.setString(6, member.getquestion());
+            ps.setString(7, member.getanswer());
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+           
             e.printStackTrace();
         } finally {
             try {
                 if (pstmt != null && !pstmt.isClosed())
                     pstmt.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
+                
                 e.printStackTrace();
             }
         }
@@ -113,15 +116,16 @@ public class MemberDAO {
 //            Resultset 탐색
             if( rs.next() )
             {
-                member = new Member();
-                member.setid( rs.getString("id"));
-                member.setpass(rs.getString("pass"));
-                member.setname( rs.getString("name"));
-                member.setemail(rs.getString("email"));
-                member.setcontact(rs.getString("contact"));
+            	member = new Member();
+            	member.setid( rs.getString("id"));
+            	member.setpass(rs.getString("pass"));
+            	member.setname( rs.getString("name"));
+            	member.setemail(rs.getString("email"));
+            	member.setcontact(rs.getString("contact"));
+            	
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         finally{
@@ -141,7 +145,7 @@ public class MemberDAO {
     
 //    member의 테이블정보 전체조회하기
     public List<Member> selectAll() {
-        String sql = "select * from member";
+        String sql = "select * from user";
         PreparedStatement pstmt = null;
 //        결과값 탐색
         ResultSet rs = null;
@@ -152,19 +156,19 @@ public class MemberDAO {
             rs = pstmt.executeQuery();
             while( rs.next() )
             {
-                Member member = new Member();
-                member.setid( rs.getString("id") );
-                member.setpass(rs.getString("pw"));
-                member.setname(rs.getString("name"));
-                member.setemail(rs.getString("email"));
-                member.setcontact(rs.getString("contact"));
+            	Member member = new Member();
+            	member.setid( rs.getString("id") );
+            	member.setpass(rs.getString("pw"));
+            	member.setname(rs.getString("name"));
+            	member.setemail(rs.getString("email"));
+            	member.setcontact(rs.getString("contact"));
                 memberList.add(member);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
-//        구문객체와 Resultset객체 닫아주기
+        //   구문객체와 Resultset객체 닫아주기
         finally{
             try{
                 if( pstmt != null && !pstmt.isClosed())
@@ -180,4 +184,45 @@ public class MemberDAO {
         return memberList;
         
     }
+  //ID 중복 체크
+       public int confirmId(String id)throws Exception{
+          Connection con =null;
+          PreparedStatement ps = null;
+          ResultSet rs = null;
+           String sql="";
+           int x=-1;
+           try{
+               con=getConnection();
+             sql="select * from user where id= ?";
+             ps = con.prepareStatement(sql);
+               ps.setString(1, id);
+                rs= ps.executeQuery();   
+                
+                if(rs.next())
+                  x=1; //해당아이디 있음
+               else
+                    x=-1;//해당아이디 없음
+           }catch(Exception ex){
+                ex.printStackTrace();
+           }finally{
+                execClose(rs,ps,con);
+           }       
+            return x;
+      }
+         
+       private Connection getConnection() {
+    	   return null;
+       }
+       //자원 정리를 위한 메소드
+       //계란노른자
+       //Connection 를통해서 PreparedStatement 를생성하고
+       //PreparedStatement 를 통해서 ResultSet 를 생성하기때문에
+       //종료할때는 ResultSet=>PreparedStatement=>Connection 와같이 생성순서의 역순으로 close 해줘야한다
+     public void execClose(ResultSet rs, PreparedStatement pstmt, Connection conn)throws Exception{
+           //자원정리
+           if(rs !=null) try{rs.close();}catch(SQLException sqle){}
+           if(pstmt !=null) try{pstmt.close();}catch(SQLException sqle){}
+           //커넥션 풀로 반납
+           if(conn !=null) try{conn.close();}catch(SQLException sqle){}
+ }
 }
