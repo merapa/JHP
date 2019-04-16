@@ -31,6 +31,7 @@ public class MemberDAO {
 	private int n;
 	private Connection con;
 	private PreparedStatement ps;
+	private int result;
 	
 	// static 통해서 생성할 수 있도록 만들기
 	static public MemberDAO getInstance() {
@@ -54,7 +55,7 @@ public class MemberDAO {
 	// -----------------------------------------------------------------
 	
 	// 회원 가입
-	protected Connection service(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+	protected boolean service(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
 		request.setCharacterEncoding("UTF-8");
 		setId(request.getParameter("id"));
 		setPass(request.getParameter("pass"));
@@ -81,14 +82,14 @@ public class MemberDAO {
 	  		ps.setString(4,email);
 	  		ps.setString(5,contact);
 	  		ps.setString(6,question);
-	  		ps.setString(7, answer);
+	  		ps.setString(7,answer);
 	  		
-	  		int result=ps.executeUpdate();
+	  		setResult(ps.executeUpdate());
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return con;
+		return false;
 	}
 	
 	
@@ -99,14 +100,14 @@ public class MemberDAO {
 	// -----------------------------------------------------------------
 	
 	// 아이디 중복 확인
-	public int confirm(String id) throws SQLException {
-		Connection con = null;
+	public boolean confirm(String id) throws SQLException {
+		con = null;
 		PreparedStatement ps =null;
 		ResultSet rs = null;
-		int result = -1;
+		
 		
 		try {
-			ps=con.prepareStatement("select id from jhp where id=?");
+			con.prepareStatement("select id from jhp where id=?");
 			con = getConnection();
 			ps = con.prepareStatement(id);
 			ps.setString(1, id);
@@ -125,7 +126,7 @@ public class MemberDAO {
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return false;
 	}
 	
 // -----------------------------------------------------------------
@@ -304,6 +305,14 @@ public class MemberDAO {
 
 	public void setPs(PreparedStatement ps) {
 		this.ps = ps;
+	}
+
+	public int getResult() {
+		return result;
+	}
+
+	public void setResult(int result) {
+		this.result = result;
 	}
 	
 	
