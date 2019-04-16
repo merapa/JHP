@@ -1,4 +1,4 @@
-JSP -> DAO DTO Servlet 사용 예정
+JSP -> DAO DTO Servlet 사용 예정 ( jsp 이용만 하다가 Dao,Servlet 추가 중 )
 현재 수정중 = joinProcess.jsp 
 
 
