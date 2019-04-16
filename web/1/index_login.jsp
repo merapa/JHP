@@ -32,7 +32,12 @@
         <!-- Latest compiled JavaScript -->
         <script src="js/bootstrap.min.js"></script>
 		
+		<title>JHP UHMS</titl>
 		
+		<style type="text/css">
+			a.no-uline {text-decoration:none}
+			::-webkit-scrollbar {display: none;}<!-- = hide scrollbar -->
+		</style>
 		
 		<style>
 			h1 {
@@ -67,10 +72,14 @@
 				color: #D3E0E0;
 				font-size: 14px;
 			}
+
+			b {
+				color: #ffffff;
+			}
 		</style>
 	</head>
 	
-	<body style="background-color:#193441">>
+	<body style="background-color:#193441; overflow: auto;"><!-- overflow: auto;= hide scrollbar -->
 		<!-- container start-->
 		<div class="container">
 			<a href="index_login.jsp" class="no-uline" ><h1>UHMS<small> Underwater Homeostatic Maintenance System </small></h1></a>
