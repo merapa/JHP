@@ -8,13 +8,12 @@
 	
 	String id=request.getParameter("id");
 	String pass=request.getParameter("pass");
+	String name=request.getParameter("name");
 	String contact=request.getParameter("contact");
 	String email=request.getParameter("email");
+	String question=request.getParameter("question");
+	String answer=request.getParameter("answer");
 	
-/* 	System.out.println(id);
-	System.out.println(pass);
-	System.out.println(contact);
-	System.out.println(email); */
 	
 	Connection conn=null;
 	PreparedStatement pstmt=null;
@@ -22,14 +21,17 @@
 	
 	try {
   		Context init = new InitialContext();
-  		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/jhp");  // 서버.xml 네임 뒤쪽 에 맞춰야할 부분
+  		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/jhp");
   		conn = ds.getConnection();
   		
-  		pstmt=conn.prepareStatement("INSERT INTO member VALUES (?,?,?,?)");
+  		pstmt=conn.prepareStatement("INSERT INTO user VALUES (?,?,?,?,?,?,?)");
   		pstmt.setString(1,id);
   		pstmt.setString(2,pass);
-  		pstmt.setString(3,contact);
+  		pstmt.setString(3,name);
   		pstmt.setString(4,email);
+		pstmt.setString(5,contact);
+		pstmt.setString(6,question);
+		pstmt.setString(7,answer);
   		int result=pstmt.executeUpdate();
   		
   		
