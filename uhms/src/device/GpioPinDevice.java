@@ -5,7 +5,6 @@ import com.pi4j.io.gpio.impl.GpioPinImpl;
 public abstract class GpioPinDevice implements Operable {
 
 	private GpioPinImpl[] pins = null;
-	private String deviceId = null;
 	
 	public void init(GpioPinImpl pin) {
 		this.pins = new GpioPinImpl[1];
@@ -25,13 +24,8 @@ public abstract class GpioPinDevice implements Operable {
 	@Override
 	public void stopDevice() {}
 
-	public String getDeviceId() {
-		return deviceId;
-	}
+	public abstract String getDeviceId();
 
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
-	}
-	
-	
+	public abstract GpioPinImpl[] getPins();
+
 }

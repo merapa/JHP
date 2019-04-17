@@ -19,7 +19,7 @@ public class Mcp3008 extends SpiPinDevice {
 	}
 	
 	@Override
-	public int getData(int channel) {
+	public int getData(int channel) throws IOException{
 		int value = 0;
 		byte data[] = new byte[] {
 				(byte) 0x01,
@@ -30,8 +30,11 @@ public class Mcp3008 extends SpiPinDevice {
 		try {
 			result = this.sdi.write(data);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		for(int i=0; i<result.length; i++) {
+			System.out.println(result[i]);
 		}
 		
 		StringBuffer sb = new StringBuffer(result.length * 2);

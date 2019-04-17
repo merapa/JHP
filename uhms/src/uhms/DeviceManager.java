@@ -3,15 +3,13 @@ package uhms;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioProvider;
 import com.pi4j.io.gpio.Pin;
-import com.pi4j.io.gpio.PinMode;
 import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.impl.GpioPinImpl;
 import com.pi4j.io.spi.SpiChannel;
@@ -28,14 +26,14 @@ import device.StepperMotor;
 
 public class DeviceManager {
 
-	private ArrayList<GpioPinDevice> gpd = null;
-	private ArrayList<SpiPinDevice> spd = null;
+	private HashMap<String, GpioPinDevice> gpd = null;
+	private HashMap<String, SpiPinDevice> spd = null;
 	private GpioProvider gp = null;
 	private GpioController gc = null;
 	
 	public DeviceManager(int gNum, int sNum) {
-		this.gpd = new ArrayList<GpioPinDevice>(gNum);
-		this.spd = new ArrayList<SpiPinDevice>(sNum);
+		this.gpd = new HashMap<String, GpioPinDevice>(gNum);
+		this.spd = new HashMap<String, SpiPinDevice>(sNum);
 		this.gp = GpioFactory.getDefaultProvider();
 		this.gc = GpioFactory.getInstance();
 	}
@@ -43,52 +41,53 @@ public class DeviceManager {
 	public void initDevice() {
 		File f = new File("./config/deviceConfig");
 		BufferedReader br = null;
+		Gpio.wiringPiSetup();
+		Gpio.pwmSetClock(23);
 		try {
 			br = new BufferedReader(new FileReader(f));
 			String[] line = null;
-			Gpio.pwmSetClock(20);
-			while((line = br.readLine().split("\\s")) != null ){
+			while((line = br.readLine().split("\\s"))!=null) {
 				if(line[0].equals("LED")) {
 					GpioPinDevice led = new LED();
 					GpioPinImpl gpin = new GpioPinImpl(this.gc,this.gp,this.returnPin(Integer.valueOf(line[1])));
-					this.pinSetting(gpin, "LED", line[1]);
-					led.init(gpin);
-					this.gpd.add(led);
+					this.gpd.put("LED", led);
+					this.gpd.get("LED").init(gpin);
+					
 				} else if(line[0].equals("COOLER")) {
 					GpioPinDevice cooler = new Fan();
 					GpioPinImpl gpin = new GpioPinImpl(this.gc,this.gp,this.returnPin(Integer.valueOf(line[1])));
-					this.pinSetting(gpin, "COOLER", line[1]);
-					cooler.init(gpin);
-					this.gpd.add(cooler);
+					this.gpd.put("COOLER",cooler);
+					this.gpd.get("COOLER").init(gpin);
+					
 				} else if(line[0].equals("HEATER")) {
 					GpioPinDevice heater = new Fan();
 					GpioPinImpl gpin = new GpioPinImpl(this.gc,this.gp,this.returnPin(Integer.valueOf(line[1])));
-					this.pinSetting(gpin, "HEATER", line[1]);
-					heater.init(gpin);
-					this.gpd.add(heater);
+					this.gpd.put("HEATER",heater);
+					this.gpd.get("HEATER").init(gpin);
+					
 				} else if(line[0].equals("SERVOMOTOR")) {
 					GpioPinDevice sm = new ServoMotor();
 					GpioPinImpl gpin = new GpioPinImpl(this.gc,this.gp,this.returnPin(Integer.valueOf(line[1])));
-					this.pinSetting(gpin, "SERVOMOTOR", line[1]);
-					sm.init(gpin);
-					this.gpd.add(sm);
+					this.gpd.put("SERVOMOTOR",sm);
+					this.gpd.get("SERVOMOTOR").init(gpin);
+					
 				} else if(line[0].equals("STEPPERMOTR")) {
 					GpioPinDevice sm = new StepperMotor();
 					GpioPinImpl[] gpins = new GpioPinImpl[4];
 					for(int i=0; i<4; i++) {
-						 gpins[i] = new GpioPinImpl(this.gc,this.gp,this.returnPin(Integer.valueOf(line[i])));
-						 this.pinSetting(gpins[i], "STEPPERMOTOR", line[i]);
+						 gpins[i] = new GpioPinImpl(this.gc,this.gp,this.returnPin(Integer.valueOf(line[i+1])));
 					}
-					sm.init(gpins);
-					this.gpd.add(sm);
+					this.gpd.put("STEPPERMOTOR",sm);
+					this.gpd.get("STEPPERMOTOR").init(gpins);
+					
 				} else if(line[0].equals("MCP3008")) {
 					SpiPinDevice spd = new Mcp3008();
-					spd.init(SpiChannel.CS0, SpiMode.MODE_0);
-					this.spd.add(spd);
+					this.spd.put("MCP3008",spd);
+					this.spd.get("MCP3008").init(SpiChannel.CS0, SpiMode.MODE_0);
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("줄읽기 끝");
 		}
 	}
 	
@@ -96,26 +95,31 @@ public class DeviceManager {
 		DeviceManager dm = new DeviceManager(5,1);
 		Scanner sc = new Scanner(System.in);
 		dm.initDevice();
-		String[] command = null;
+		String[] command = {new String("start")};
 		while(!command[0].equals("exit")) {
 			command = sc.nextLine().split("\\s");
 			if(command[0].equals("LED")){
-				dm.gpd.get(0).runDevice(Integer.parseInt(command[1]));
+				dm.gpd.get(command[0]).runDevice(Integer.parseInt(command[1]));
 			} else if(command[0].equals("COOLER")) {
-				dm.gpd.get(1).runDevice(Integer.parseInt(command[1]));
+				dm.gpd.get(command[0]).runDevice(Integer.parseInt(command[1]));
 			} else if(command[0].equals("HEATER")) {
-				dm.gpd.get(2).runDevice(Integer.parseInt(command[1]));
+				dm.gpd.get(command[0]).runDevice(Integer.parseInt(command[1]));
 			} else if(command[0].equals("SERVOMOTOR")) {
-				dm.gpd.get(3).runDevice(Integer.parseInt(command[1]));
+				dm.gpd.get(command[0]).runDevice(Integer.parseInt(command[1]));
 			} else if(command[0].equals("STEPPERMOTOR")) {
-				dm.gpd.get(4).runDevice(Integer.parseInt(command[1]));
+				dm.gpd.get(command[0]).runDevice(Integer.parseInt(command[1]));
 			} else if(command[0].equals("MCP3008")) {
-				System.out.println(dm.spd.get(0).getData(0));
+				try{
+					System.out.println(dm.spd.get(command[0]).getData(Integer.parseInt(command[1])));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			} else {
 				System.out.println("명령어 없음");
 			}
 		}
 		dm.shutdown();
+		sc.close();
 	}
 	
 	private Pin returnPin(int pnum) {
@@ -157,34 +161,6 @@ public class DeviceManager {
 			break;
 		}
 		return pin;
-	}
-	
-	private void pinSetting(GpioPinImpl pin, String Name, String number) {
-		switch(Name) {
-		case "LED" :
-			pin.setMode(PinMode.DIGITAL_OUTPUT);
-			pin.setName("LED");
-			pin.setProperty(Name+number, number);
-			break;
-		case "FAN" : 
-			pin.setMode(PinMode.DIGITAL_OUTPUT);
-			pin.setName("FAN");
-			pin.setProperty(Name+number, number);
-			break;
-		case "SERVOMOTOR" : 
-			pin.setMode(PinMode.SOFT_PWM_OUTPUT);
-			pin.setPwmRange(128);
-			pin.setName("ServoMotor");
-			pin.setProperty(Name+number, number);
-			break;
-		case "STEPPERMOTOR" : 
-			pin.setMode(PinMode.DIGITAL_OUTPUT);
-			pin.setName("StepperMotor");
-			pin.setProperty(Name+number, number);
-			break;
-		default: break;
-		}
-		
 	}
 	
 	private void shutdown() {

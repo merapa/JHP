@@ -1,5 +1,7 @@
 package device;
 
+import com.pi4j.io.gpio.PinMode;
+import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.impl.GpioPinImpl;
 
 public class StepperMotor extends GpioPinDevice {
@@ -23,6 +25,12 @@ public class StepperMotor extends GpioPinDevice {
 	public void init(GpioPinImpl pin) {
 		this.pins = new GpioPinImpl[1];
 		this.pins[0] = pin;
+		this.pins[0].setMode(PinMode.DIGITAL_OUTPUT);
+		this.pins[0].setName(pin.getPin().getAddress()+"Digital_Output");
+		this.pins[0].setProperty("Allocated_Naming_0", "0");
+		this.pins[0].setTag("Pin_"+pin.getPin().getAddress());
+		this.pins[0].setState(PinState.LOW);
+		this.deviceId = "Pin_"+pin.getPin().getAddress();
 	}
 
 	@Override
@@ -30,7 +38,13 @@ public class StepperMotor extends GpioPinDevice {
 		this.pins = new GpioPinImpl[pins.length];
 		for(int i=0; i<pins.length; i++) {
 			this.pins[i] = pins[i];
+			this.pins[i].setMode(PinMode.DIGITAL_OUTPUT);
+			this.pins[i].setName(pins[i].getPin().getAddress()+"Digital_Output");
+			this.pins[i].setProperty("Allocated_Naming_"+i, String.valueOf(i));
+			this.pins[i].setTag("Pin_"+pins[i].getPin().getAddress());
+			this.pins[i].setState(PinState.LOW);
 		}
+		this.deviceId = "Pin_"+pins[0].getPin().getAddress()+":"+pins.length;
 	}
 
 	@Override
@@ -38,10 +52,9 @@ public class StepperMotor extends GpioPinDevice {
 		if((int)value > 0) {
 			this.rotateR((int)value);
 		} else if((int) value < 0) {
-			this.rotateL((int)value);
-		} else {
-			this.stopDevice();
+			this.rotateL(((int)value*(-1)));
 		}
+		this.stopDevice();
 	}
 
 	@Override
@@ -53,18 +66,22 @@ public class StepperMotor extends GpioPinDevice {
 		}
 	}
 	
+	@Override
 	public String getDeviceId() {
-		return deviceId;
+		return this.deviceId;
 	}
 
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
+	@Override
+	public GpioPinImpl[] getPins() {
+		return this.pins;
 	}
 
 	private void rotateR(int step) {
 		try {
 			for(int i=0; i<step; i++) {
-				this.phaseState(this.rotateRData[i], 10);
+				for(int j=0; j<this.rotateLData.length; j++) {
+					this.phaseState(this.rotateRData[j], 10);
+					}
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -74,7 +91,9 @@ public class StepperMotor extends GpioPinDevice {
 	private void rotateL(int step) {
 		try {
 			for(int i=0; i<step; i++) {
-				this.phaseState(this.rotateLData[i], 10);
+				for(int j=0; j<this.rotateLData.length; j++) {
+					this.phaseState(this.rotateLData[j], 10);
+					}
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();

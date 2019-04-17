@@ -26,5 +26,5 @@ public abstract class SpiPinDevice {
 		this.sdi = sdi;
 	}
 	
-	public abstract int getData(int channel);
+	public abstract int getData(int channel) throws IOException;
 }
