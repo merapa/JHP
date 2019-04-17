@@ -1,5 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
+    <%@ page import="java.sql.*"%>
+	<%@ page import="javax.sql.*" %>
+	<%@ page import="javax.naming.*" %>
+	
+<% 
+	request.setCharacterEncoding("UTF-8");
+	String id =(String)session.getAttribute("id");
+	String pass=request.getParameter("pass");
+	String admin=request.getParameter("pass");
+%>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 	<head>
 		<meta charset="utf-8"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,12 +29,18 @@
         
         <!-- Latest compiled JavaScript -->
         <script src="js/bootstrap.min.js"></script>
-		
+        
+		<title>JHP UHMS</title>
+        
+		<style type="text/css">
+			a.no-uline {text-decoration:none}
+			::-webkit-scrollbar {display: none;}<!-- = hide scrollbar -->
+		</style>
 		
 		
 		<style>
 			h1 {
-				color: #ffffff;
+			color: #ffffff;
 			}
 			h2 {
 				color: #ECF7D5;
@@ -32,7 +52,7 @@
 				color: #ECF7D5;
 			}
 			h4 {
-				color: #ffffff;
+			color: #ffffff;
 			}
 			h5 {
 				color: #ffffff;
@@ -51,75 +71,90 @@
 				color: #D3E0E0;
 				font-size: 14px;
 			}
+			b {
+				color: #ffffff;
+			}
+			
+			/*------------------------------------------- */
+			button {
+
+				background-color: #4CAF50;
+				color: white;
+				padding: 20px 20px;
+				margin: 20px 0;
+				border: none;
+				cursor: pointer;
+				width: 100%;
+			}
+			
+			button:hover {
+				opacity: 0.8;
+			}
+			.mypagebtn {
+					width: auto;
+					padding: 10px 18px;
+					background-color: #green;
+				}
+			.logoutbtn {
+					width: auto;
+					padding: 10px 18px;
+					background-color: #green;
+				}
+				
+			img {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				max-width: 100%;
+			}
 		</style>
 	</head>
 	
-	<body style="background-color:#193441">
+	<body style="background-color:#193441; overflow: auto;"><!-- overflow: auto;= hide scrollbar -->
+	
 		<!-- container start-->
-		<div class="container">
-			<a href="index.html"><h1>UHMS<small> Underwater Homeostatic Maintenance System </small></h1></a>
-			<h3>수중생태 항상성 유지 시스템</h3>
-			
-			<!-- login form start-->
-			<div class="topnav">
-				<div class="login-container">
-					<form action="/action_page.php">
-						<h4 align="right">맛난이님 환영합니다.</h4>
-						<button style="margin-right: 3px" type="submit">Logout</button>
-						<button style="margin-right: 3px" type="submit">Logout</button>
-						<button style="margin-right: 3px" type="submit">회원정보 보기</button>
-						
-						
-					</form>
-				</div>
-			</div>
-			<!-- login form end-->
-			
-			<div class="row" align="center">
-				<div class="col-sm-2" style="background-color:#3E606F"><a href="light.html"><h5>조명</h5></a></div>
-				<div class="col-sm-2" style="background-color:#12252E"><a href="heat.html"><h5>히터</h5></a></div>
-				<div class="col-sm-2" style="background-color:#3E606F"><a href="cooling.html"><h5>쿨러</h5></a></div>
-				<div class="col-sm-2" style="background-color:#12252E"><a href="waterlevel.html"><h5>수위보충</h5></a></div>
-				<div class="col-sm-2" style="background-color:#3E606F"><a href="feed.html"><h5>먹이자동급여</h5></a></div>
-				<div class="col-sm-2" style="background-color:#12252E"><a href="list.html"><h5>수조목록</h5></a></div>
-			
-			</div>
-		</div>
+		<%@ include file="header.jsp"%>
 		<!-- container end-->
 		
 		
 		<!-- slideshow-container start-->
-		<div style="height: 890px">
-			<div class="slideshow-container">
+		<div>
+			<div class="slideshow-container" style="background-color: #000000;">
 	
 	            <div class="mySlides fade">
 	                <div class="numbertext">1 / 3</div>
-	                <img src="img/01.jpg" style="width:100%">
-	                <div class="text">
+	                <img src="img/01.jpg">
+	                <!--
+					<div class="text">
 						<h2>WELCOME TO UHMS</h2>
 						<p>UHMS는 원하는 조건으로 수족관 환경을 일정하게 유지시켜주는 시스템 입니다. 어종에 따른 다양한 환경요소를 자유롭게 관리 및 유지가 가능합니다.</p>
 						<footer>From. JHP together</footer>
 					</div>
+					-->
 	            </div>
 	    
 	            <div class="mySlides fade">
 	                <div class="numbertext">2 / 3</div>
-	                <img src="img/02.jpg" style="width:100%">
+	                <img src="img/02.jpg">
+					<!--
 	                <div class="text">
 						<h2>WELCOME TO UHMS</h2>
 						<p>UHMS는 원하는 조건으로 수족관 환경을 일정하게 유지시켜주는 시스템 입니다. 어종에 따른 다양한 환경요소를 자유롭게 관리 및 유지가 가능합니다.</p>
 						<footer>From. JHP together</footer>
 					</div>
+					-->
 	            </div>
 	    
 	            <div class="mySlides fade">
 	                <div class="numbertext">3 / 3</div>
-	                <img src="img/03.jpg" style="width:100%">
+	                <img src="img/03.jpg">
+					<!--
 	                <div class="text">
 						<h2>WELCOME TO UHMS</h2>
 						<p>UHMS는 원하는 조건으로 수족관 환경을 일정하게 유지시켜주는 시스템 입니다. 어종에 따른 다양한 환경요소를 자유롭게 관리 및 유지가 가능합니다.</p>
 						<footer>From. JHP together</footer>
 					</div>
+					-->
 	            </div>
 	
 			</div>
