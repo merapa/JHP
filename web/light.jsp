@@ -102,6 +102,8 @@
 					padding: 10px 18px;
 					background-color: #green;
 			}
+			
+			
 			.loginbtn {
 				width: auto;
 				padding: 10px 18px;
@@ -139,7 +141,7 @@
 				color: #ffffff;
 			}
 			select {
-				width: 34%;
+				width: 26%;
 				margin: 3px 0;
 				display: inline-block;
 				border: 1px solid #ccc;
@@ -151,40 +153,7 @@
 	</head>
 	<body style="background-color:#193441; overflow: auto;"><!-- overflow: auto;= hide scrollbar -->
 		<!-- container start-->
-		<div class="container">
-			<img src="img/logo_white.png" style="width:140px; padding:20px;" align="right"><br><br>
-			<a href="index_login.jsp" class="no-uline" ><h1>UHMS<small> Underwater Homeostatic Maintenance System </small></h1></a>
-			<h3>수중생태 항상성 유지 시스템</h3>
-			
-			<!-- login form start-->
-			<div class="topnav">
-				<div class="login-container">
-					<form action="loginForm.jsp" method="post">
-						<h4 align="right"><%=id%> 님 환영합니다.</h4>
-						<button type="button" class="mypagebtn" onclick="location.href='Boardinfo.jsp'" style="float: right;">MyPage</button>
-						<button type="button" class="logoutbtn" onclick="location.href='loginForm.jsp'" style="float: right;">Logout</button>
-						<br><br><br><br>
-						
-						<% if(id.equals("aaa")){
-						%>
-						<h4 align="right"><input type="button" onclick="location.href='member_list.jsp'" value="관리자 메뉴"></h4></a><br>
-						<%}%>
-					</form>
-				</div>
-			</div>
-			<!-- login form end-->
-			<div class="row" align="center">
-				<div class="col-sm-3" style="background-color:#3E606F; margin-top:3px;"><a href="light.jsp"><h5>조명</h5></a></div>
-				<div class="col-sm-3" style="background-color:#12252E; margin-top:3px;"><a href="heat.jsp"><h5>히터</h5></a></div>
-				<div class="col-sm-3" style="background-color:#3E606F; margin-top:3px;"><a href="cooling.jsp"><h5>쿨러</h5></a></div>
-				<div class="col-sm-3" style="background-color:#12252E; margin-top:3px;"><a href="waterlevel.jsp"><h5>수위보충</h5></a></div>
-				<div class="col-sm-3" style="background-color:#3E606F; margin-top:3px;"><a href="feed.jsp"><h5>먹이자동급여</h5></a></div>
-				<div class="col-sm-3" style="background-color:#12252E; margin-top:3px;"><a href="list.jsp"><h5>수조목록</h5></a></div>
-				<div class="col-sm-3" style="background-color:#3E606F; margin-top:3px;"><a href="daiary.jsp"><h5>기록일지</h5></a></div>
-				<div class="col-sm-3" style="background-color:#12252E; margin-top:3px;"><a href="qna.jsp"><h5>QnA</h5></a></div>
-			
-			</div>
-		</div>
+		<%@ include file="header.jsp"%>
 		<!-- container end-->
 		
 		<br>
@@ -193,8 +162,8 @@
 		
 		<!-- list start-->
 		<div class="container" style="background-color:#12252E;">
-			<h3 class="a">히터</h3>
-			<p class="a"> 히터의 작동/중지 온도를 설정할 수 있습니다. </p>
+			<h3 class="a">조명</h3>
+			<p class="a"> 조명의 점등/소등 시간을 설정할 수 있습니다. </p>
 		</div>
 		
 		<div align="center" style="height: 890px; padding: 50px;">
@@ -204,27 +173,60 @@
 				<section>
 				<div class="listleft" style="width:79%; height: 100px; padding: 3px;"><!-- background-color:blue; -->
 					<b>현재상태 : ON</b><br>
-					<b>작동온도 : </b>
+					<b>점등 : </b>
 					<select class="select">
-<%	
-						int i;
-						for(i=20; i<31; i++){
-							out.println("\t\t\t\t\t\t" + "<option value=\"" + i + "℃\">" + i + "℃" + "</option>" + "<br>");
+<%
+						int i = 0;
+						for(i=0; i<10; i++){
+							out.println("\t\t\t\t\t\t" + "<option value=\"0" + i + "\">" + "0" + i + "</option>" + "<br>");
+						
+						}%>
+<%
+						for(i=10; i<24; i++){
+							out.println("\t\t\t\t\t\t" + "<option value=\"" + i + "\">" + i + "</option>" + "<br>");
 						}
-					%>
-					</select><br>
-					<b>중지온도 : </b>
+						%>
+					</select><b>시</b>
 					<select class="select">
-<%	
-						for(i=20; i<31; i++){
-							out.println("\t\t\t\t\t\t" + "<option value=\"" + i + "℃\">" + i + "℃" + "</option>" + "<br>");
+<%
+						for(i=0; i<10; i++){
+							out.println("\t\t\t\t\t\t" + "<option value=\"0" + i + "\">" + "0" + i + "</option>" + "<br>");
+						
+						}%>
+<%
+						for(i=10; i<60; i++){
+							out.println("\t\t\t\t\t\t" + "<option value=\"" + i + "\">" + i + "</option>" + "<br>");
 						}
-					%>
-					</select>
-					<br>
+						%>
+					</select><b>분</b><br>
+					<b>소등 : </b>
+					<select class="select">
+<%
+						for(i=0; i<10; i++){
+							out.println("\t\t\t\t\t\t" + "<option value=\"0" + i + "\">" + "0" + i + "</option>" + "<br>");
+						
+						}%>
+<%
+						for(i=10; i<24; i++){
+							out.println("\t\t\t\t\t\t" + "<option value=\"" + i + "\">" + i + "</option>" + "<br>");
+						}
+						%>
+					</select><b>시</b>
+					<select class="select">
+<%
+						for(i=0; i<10; i++){
+							out.println("\t\t\t\t\t\t" + "<option value=\"0" + i + "\">" + "0" + i + "</option>" + "<br>");
+						
+						}%>
+<%
+						for(i=10; i<60; i++){
+							out.println("\t\t\t\t\t\t" + "<option value=\"" + i + "\">" + i + "</option>" + "<br>");
+						}
+						%>
+					</select><b>분</b><br>
 				</div>
 				<div class="listright" style="width:20%; height: 100px; padding: 5px;"><!-- background-color:red; -->
-					<button type="submit"><b>적용</b></button><br>
+					<button type="submit" onclick = "location.href='lightProcess.jsp'"><b>적용</b></button><br>
 				</div>
 				</section>
 			</div>
