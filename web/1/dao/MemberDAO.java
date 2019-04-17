@@ -1,95 +1,69 @@
 package dao;
-
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
+import javax.naming.*;
+import javax.sql.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 import model.Member;
 
 
+
 public class MemberDAO {
-
+	Connection con = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
 	
-	private MemberDAO() {
-	}
-
-	private static MemberDAO instance = new MemberDAO();
-	private String id;
-	private String pass;
-	private String name;
-	private String email;
-	private String question;
-	private String contact;
-	private String answer;
-	private int n;
-	private Connection con;
-	private PreparedStatement ps;
+	Member member = new Member();
 	private int result;
 	
-	// static 통해서 생성할 수 있도록 만들기
-	static public MemberDAO getInstance() {
-		return instance;
-	}
-	
 	//dbcp 만들기
-	public Connection getConnection() {
-		Connection con = null;
+	public MemberDAO() {
+		
 		try {
-			Context initContext = new InitialContext();
-			Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("java:comp/env/jdbc/jhp");
+			Context init = new InitialContext();
+			DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/jhp");
 			con = ds.getConnection();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return con;
+	}
+	
+	public void dbClose() {
+		if(con != null)
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	}
 	
 	// -----------------------------------------------------------------
 	
 	// 회원 가입
-	protected boolean service(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
-		request.setCharacterEncoding("UTF-8");
-		setId(request.getParameter("id"));
-		setPass(request.getParameter("pass"));
-		setName(request.getParameter("name"));
-		setEmail(request.getParameter("email"));
-		setContact(request.getParameter("contact"));
-		setQuestion(request.getParameter("question"));
-		setAnswer(request.getParameter("answer"));
-		
-		setN(0);
-		setPs(null);
-		setCon(null);
-		
-		Connection con = null;
+	public void MemberInsert(Member member) {
+		result = 0;
 		try {
-			Context initContext = new InitialContext();
-			Context envContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("java:comp/env/jdbc/jhp");
-			con = ds.getConnection();
-			ps=con.prepareStatement("INSERT INTO member VALUES (?,?,?,?,?,?)");
-	  		ps.setString(1,id);
-	  		ps.setString(2,pass);
-	  		ps.setString(3,name);
-	  		ps.setString(4,email);
-	  		ps.setString(5,contact);
-	  		ps.setString(6,question);
-	  		ps.setString(7,answer);
+			ps = con.prepareStatement("insert into user value (?, ?, ?, ?, ?, ?, ?)");
+
+			member.setid(rs.getString("id"));
+			member.setpass(rs.getString("pass"));
+			member.setname(rs.getString("name"));
+			member.setemail(rs.getString("email"));
+			member.setcontact(rs.getString("contact"));
+			member.setquestion(rs.getString("question"));
+			member.setanswer(rs.getString("answer"));
 	  		
-	  		setResult(ps.executeUpdate());
-			
-		}catch(Exception e) {
+	  		result = ps.executeUpdate();
+		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if (rs != null) try { rs.close();} catch (Exception e) {e.printStackTrace();}
+			if (ps != null) try { ps.close(); } catch (Exception e) {e.printStackTrace();}
 		}
-		return false;
+		
+		return;
+		
 	}
 	
 	
@@ -108,7 +82,7 @@ public class MemberDAO {
 		
 		try {
 			con.prepareStatement("select id from jhp where id=?");
-			con = getConnection();
+			con = getQuestion();
 			ps = con.prepareStatement(id);
 			ps.setString(1, id);
 			rs=ps.executeQuery();
@@ -132,22 +106,18 @@ public class MemberDAO {
 // -----------------------------------------------------------------
 	// 멤버 수정
 	
+	private Connection getQuestion() {
+		return null;
+		}
+
 	public int updateMember(Member vo) throws SQLException {
-		int result = -1;
-		ps=con.prepareStatement("update user set pass=?,email=?,email1=?,contact=?,question=?,answer=? where id=?");
-		Connection con = null;
-		PreparedStatement ps = null;
-		
+		int result = 0;
 		try {
-			con=getConnection();
-			ps = con.prepareStatement(id);
-			ps.setString(1, vo.getpass());
-			ps.setString(2, vo.getemail());
-			ps.setString(3, vo.getemail());
-			ps.setString(4, vo.getcontact());
-			ps.setString(5, vo.getquestion());
-			ps.setString(6, vo.getanswer());
+			ps=con.prepareStatement("update user set pass=?,email=?,email1=?,contact=?,"
+					+ "question=?,answer=? where id=?");
+	
 			result = ps.executeUpdate();
+			
 		}catch(Exception e) {
 		}finally {
 			try {
@@ -160,7 +130,7 @@ public class MemberDAO {
 		return result;
 	}
 	
-// -----------------------------------------------------------------
+	// -----------------------------------------------------------------
 		// 아이디 중복 검사
 	public int idCheck(Connection con, String id) throws Exception,SQLException{
 		  PreparedStatement ps = null; 
@@ -225,70 +195,6 @@ public class MemberDAO {
 	public void insertMember(Member member) {
 
 		
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getQuestion() {
-		return question;
-	}
-
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-
-	public String getContact() {
-		return contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-
-	public int getN() {
-		return n;
-	}
-
-	public void setN(int n) {
-		this.n = n;
 	}
 
 	public Connection getCon() {
