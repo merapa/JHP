@@ -1,14 +1,9 @@
 package dao;
 import java.sql.*;
 import util.*;
-import javax.naming.*;
-import javax.sql.*;
 
 import dto.MemberDTO;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import model.Member;
 
 
 public class MemberDAO {
@@ -16,15 +11,18 @@ public class MemberDAO {
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
-	// ---------------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------------
+	// 로그인
+	
 	public int login(String id,String pass) throws SQLException {
 		Connection con = DatabaseUtil.getConnection();
-		ps = con.prepareStatement("select * form user where = id");
+		ps = con.prepareStatement("select * from user where id=?");
 		try {
 			con = DatabaseUtil.getConnection();
 			ps = con.prepareStatement(id);
 			ps.setString(1, id);
-			ps.setString(2, pass);
+
 			rs=ps.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(pass)) {
@@ -48,7 +46,7 @@ public class MemberDAO {
 	
 	
 	
-	// ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 	// 회원 가입 
 	public int join(MemberDTO dto) {
 		try {
@@ -73,7 +71,7 @@ public class MemberDAO {
 		}
 		return -1; // 회원가입 실패
 	}
-	// ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 	// 아이디 체크
 		public boolean idCheck(MemberDTO dto) {
 			try {
@@ -91,10 +89,10 @@ public class MemberDAO {
 				try {if(ps != null) ps.close();} catch(Exception e) {e.printStackTrace();}
 				try {if(rs != null) rs.close();} catch(Exception e) {e.printStackTrace();}
 			}
-			return false; // 회원가입 실패
+			return false; // 회원체크 실패
 		}
 	
-		// ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 		// 회원 수정 
 	
 		public int modify(MemberDTO dto) {
@@ -119,7 +117,7 @@ public class MemberDAO {
 			return -1; // 회원수정 실패
 		}
 	
-		// ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 		// 아이디 찾기 
 			public int Forget_id(MemberDTO dto) {
 				try {
@@ -137,7 +135,7 @@ public class MemberDAO {
 					try {if(ps != null) ps.close();} catch(Exception e) {e.printStackTrace();}
 					try {if(rs != null) rs.close();} catch(Exception e) {e.printStackTrace();}
 				}
-				return -1; // 회원수정 실패
+				return -1; // 회원찾기 실패
 			}
 // ---------------------------------------------------------------------------------
 		// 비밀번호 찾기 
@@ -160,7 +158,7 @@ public class MemberDAO {
 						try {if(ps != null) ps.close();} catch(Exception e) {e.printStackTrace();}
 						try {if(rs != null) rs.close();} catch(Exception e) {e.printStackTrace();}
 					}
-					return -1; // 회원수정 실패
+					return -1; // 비밀번호 찾기 실패
 				}
 		
 	
