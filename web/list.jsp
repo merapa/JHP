@@ -1,17 +1,26 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <%@ page import="java.sql.*"%>
-	<%@ page import="javax.sql.*" %>
-	<%@ page import="javax.naming.*" %>
-	
-<% 
+	<% 
 	request.setCharacterEncoding("UTF-8");
 	String id =(String)session.getAttribute("id");
 	String pass=request.getParameter("pass");
-%>
-
-
+	String email =(String)session.getAttribute("email");
+	%>
+    <%!
+		
+		Connection connection;
+		Statement statement;
+		ResultSet resultSet;
+		
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://127.0.0.1:3306/JHP";
+		String uid = "jhp";
+		String upass = "01230123";
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -147,6 +156,24 @@
 				box-sizing: border-box;
 			}
 			
+			table {
+				font-family: arial, sans-serif;
+				border-collapse: collapse;
+				width: 100%;
+			}
+			th {
+				background-color: #122522;
+			}
+			td, th {
+				border: 1px solid #000000;
+				text-align: left;
+				padding: 8px;
+				color: #ffffff;
+			}
+
+			tr:nth-child(even) {
+				background-color: #12252E;
+			}
 		</style>
 
 	</head>
@@ -167,20 +194,54 @@
 		
 		<div align="center" style="height: 890px; padding: 50px;">
 			<div class="list" align="center" style="width:100%; background-color:#3E606F;">
-				<p align="left" style="padding: 2px;"><b>수조 1</b></p>
+				<p align="left" style="padding: 2px;"><b>수조 환경 설정 내용</b></p>
 				
 				<section>
-				<div class="listleft" style="width:79%; height: 130px; padding: 5px;" align="left"><!-- background-color:blue; -->
-					<b>조명 : (08:00 ~ 20:00) ON</b><br>
-					<b>히터 : 히터 (25℃) OFF</b><br>
-					<b>쿨러 : 쿨러 (25℃) OFF</b><br>
-					<b>수위 : (29cm) OFF</b><br>
-					<b>급여시간1 : (08:00) OFF</b><br>
-					<b>급여시간2 : ( - ) OFF</b><br>
-				</div>
-				<div class="listright" style="width:20%; height: 100px; padding: 3px;"><!-- background-color:red; -->
-					<!-- <button type="submit"><b>적용</b></button><br> -->
-				</div>
+				<div class="listleft" style="width:100%; padding: 5px;" align="left"><!-- background-color:blue; -->
+					<%
+						try{
+							Class.forName(driver);
+							connection = DriverManager.getConnection(url, uid, upass);
+							statement = connection.createStatement();
+							
+							String query = "select * from control";
+							resultSet = statement.executeQuery(query);
+							
+							while(resultSet.next()){
+								String light_on = resultSet.getString("light_on");
+								String light_off = resultSet.getString("light_off");
+								String heater_on = resultSet.getString("heater_on");
+								String heater_off = resultSet.getString("heater_off");
+								String cooler_on = resultSet.getString("cooler_on");
+								String cooler_off = resultSet.getString("cooler_off");
+								String water_on = resultSet.getString("water_on");
+								String water_off = resultSet.getString("water_off");
+								String feed1 = resultSet.getString("feed1");
+								String feed2 = resultSet.getString("feed2");
+								
+								out.println("<table>");
+								out.println("<tr><th>항목</th><th>값 1</th><th>값 2</th></tr>");
+								out.println("<tr><td>Light</td><td>ON : " + light_on + " </td><td>OFF : " + light_off + " </td></tr>");
+								out.println("<tr><td>Heater</td><td>ON : " + heater_on + " </td><td>OFF : " + heater_off + " </td></tr>");
+								out.println("<tr><td>Cooler</td><td>ON : " + cooler_on + " </td><td>OFF : " + cooler_off + " </td></tr>");
+								out.println("<tr><td>Water</td><td>ON : " + water_on + " </td><td>OFF : " + water_off + " </td></tr>");
+								out.println("<tr><td>Feed</td><td>Time 1 : " + feed1 + " </td><td>Time 2 : " + feed2 + " </td></tr>");
+								out.println("</table><br>");
+							}
+							
+							
+						}catch(Exception e){
+							e.printStackTrace();
+						}finally{
+							try{
+								if(resultSet != null) resultSet.close();
+								if(statement != null) statement.close();
+								if(connection != null) connection.close();
+							}catch(Exception e2){
+								e2.printStackTrace();
+							}
+						}
+					%>
 				</section>
 			</div>
 		</div>
