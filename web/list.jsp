@@ -192,7 +192,7 @@
 			<p class="a"> 수조관리 상태를 종합적으로 확인할수 있습니다. </p>
 		</div>
 		
-		<div align="center" style="height: 890px; padding: 50px;">
+		<div align="center" style="padding: 50px;">
 			<div class="list" align="center" style="width:100%; background-color:#3E606F;">
 				<p align="left" style="padding: 2px;"><b>수조 환경 설정 내용</b></p>
 				
@@ -229,6 +229,50 @@
 								out.println("</table><br>");
 							}
 							
+							
+						}catch(Exception e){
+							e.printStackTrace();
+						}finally{
+							try{
+								if(resultSet != null) resultSet.close();
+								if(statement != null) statement.close();
+								if(connection != null) connection.close();
+							}catch(Exception e2){
+								e2.printStackTrace();
+							}
+						}
+					%>
+				</section>
+			</div>
+		</div>
+		
+		<div align="center" style="padding: 50px;">
+			<div class="list" align="center" style="width:100%; background-color:#3E606F;">
+				<p align="left" style="padding: 2px;"><b>수조내 센싱 정보</b></p>
+				
+				<section>
+				<div class="listleft" style="width:100%; padding: 5px;" align="left"><!-- background-color:blue; -->
+					<%
+						try{
+							Class.forName(driver);
+							connection = DriverManager.getConnection(url, uid, upass);
+							statement = connection.createStatement();
+							
+							String query = "select * from data";
+							resultSet = statement.executeQuery(query);
+							
+							out.println("<table>");
+							out.println("<tr><th>일시</th><th>온도</th><th>수위</th></tr>");
+							
+							while(resultSet.next()){
+								String datetime = resultSet.getString("datetime");
+								String temp = resultSet.getString("temp");
+								String water = resultSet.getString("water");
+								
+								out.println("<tr><td>" + datetime + "</td><td>" + temp + "</td><td>" + water + "</td></tr>");
+								
+							}
+							out.println("</table><br>");
 							
 						}catch(Exception e){
 							e.printStackTrace();
