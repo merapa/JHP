@@ -6,7 +6,6 @@ import com.pi4j.io.gpio.impl.GpioPinImpl;
 public class ServoMotor extends GpioPinDevice {
 
 	private GpioPinImpl[] pins = null;
-	private String deviceId = null;
 	
 	@Override
 	public void init(GpioPinImpl pin) {
@@ -18,26 +17,25 @@ public class ServoMotor extends GpioPinDevice {
 		this.pins[0].setProperty("Allocated_Naming_0", "0");
 		this.pins[0].setTag("Pin_"+pin.getPin().getAddress());
 		this.pins[0].setPwm(5);
-		this.deviceId = "Pin_"+pin.getPin().getAddress();
 	}
 
 	@Override
 	public void init(GpioPinImpl[] pins) {
 		this.pins = new GpioPinImpl[pins.length];
 		for(int i=0; i<pins.length; i++) {
+			this.pins[i] = pins[i];
 			this.pins[i].setMode(PinMode.SOFT_PWM_OUTPUT);
-			this.pins[i].setPwmRange(100);
+			this.pins[i].setPwmRange(128);
 			this.pins[i].setName(pins[i].getPin().getAddress()+"Soft_Pwm_OutPut");
 			this.pins[i].setProperty("Allocated_Naming_"+i, String.valueOf(i));
 			this.pins[i].setTag("Pin_"+pins[i].getPin().getAddress());
 			this.pins[i].setPwm(5);
 		}
-		this.deviceId = "Pin_"+pins[0].getPin().getAddress()+":"+pins.length;
 	}
 
 	@Override
-	public void runDevice(Object value) {
-		int pwm_value = (int)value;
+	public void runDevice(int value) {
+		int pwm_value = value;
 		if(pwm_value < 5) {
 			pwm_value = 5;
 		}
@@ -57,12 +55,13 @@ public class ServoMotor extends GpioPinDevice {
 	}
 
 	@Override
-	public String getDeviceId() {
-		return this.deviceId;
-	}
-
-	@Override
 	public GpioPinImpl[] getPins() {
 		return this.pins;
+	}
+
+	
+	@Override
+	public void run() {
+		this.runDevice(super.getValues());
 	}
 }

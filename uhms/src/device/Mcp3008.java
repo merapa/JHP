@@ -32,11 +32,7 @@ public class Mcp3008 extends SpiPinDevice {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		for(int i=0; i<result.length; i++) {
-			System.out.println(result[i]);
-		}
-		
+
 		StringBuffer sb = new StringBuffer(result.length * 2);
 		String hexDec = null;
 		for(int i=0; i<result.length; i++) {
@@ -45,5 +41,15 @@ public class Mcp3008 extends SpiPinDevice {
 		}
 		value = Integer.parseInt(sb.toString(),16);
 		return value;
+	}
+
+	@Override
+	public Integer[] call() throws Exception {
+		Integer[] temp = new Integer[super.getDatachannel().length];
+		for(int i=0; i<super.getDatachannel().length; i++) {
+			temp[i] = this.getData(super.getDatachannel()[i]);
+		}
+		temp[1] = (int)(5.0*temp[1].intValue()*100.0 /1024);//channel 7's lm35
+		return temp;
 	}
 }

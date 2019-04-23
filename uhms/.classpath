@@ -5,5 +5,7 @@
 	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-core.jar"/>
 	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-device.jar"/>
 	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-gpio-extension.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/home/pi/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
