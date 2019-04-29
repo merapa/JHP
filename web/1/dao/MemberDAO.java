@@ -14,12 +14,12 @@ public class MemberDAO {
 	
 	public MemberDAO() {
 		  try {
-			  // 로드
+	            // 로드
 	            Class.forName("com.mysql.jdbc.Driver");
 	            // 연결
 	            con = DriverManager
-	                    .getConnection("jdbc:mysql://localhost:3307/jhp",
-	                            "zerock", "1234");
+	                    .getConnection("jdbc:mysql://localhost:3306/JHP",
+	                            "jhp", "01230123");
 
  
         } catch (ClassNotFoundException e) {
