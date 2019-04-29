@@ -24,15 +24,16 @@
   		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/jhp");
   		conn = ds.getConnection();
   		
-  		pstmt=conn.prepareStatement("INSERT INTO user VALUES (?,?,?,?,?,?,?)");
+  		pstmt=conn.prepareStatement("insert into user values (?,?,?,?,?)");
   		pstmt.setString(1,id);
   		pstmt.setString(2,pass);
   		pstmt.setString(3,name);
   		pstmt.setString(4,email);
 		pstmt.setString(5,contact);
-		pstmt.setString(6,question);
-		pstmt.setString(7,answer);
+/* 		pstmt.setString(6,question);
+		pstmt.setString(7,answer); */
   		int result=pstmt.executeUpdate();
+  		
   		
   		
   		if(result!=0){  			
