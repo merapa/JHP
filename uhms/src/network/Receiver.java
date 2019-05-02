@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.Callable;
 
-public class Receiver implements Callable<String>{
+public class Receiver implements Runnable{
 	
 	private URL url = null;
 	private String result = null;
@@ -41,11 +41,14 @@ public class Receiver implements Callable<String>{
 	}
 	
 	@Override
-	public String call() throws Exception {
-		this.sendPost(null);
-		return result;
+	public void run() {
+		try {
+			this.sendPost(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public String getResult() {
 		return this.result;
 	}

@@ -5,9 +5,6 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-
-import network.MessageControl;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -57,7 +54,6 @@ public class MonitorTest {
 	//@Test
 	public void test3_getAndSetValues() {
 		System.out.println("test_3_start");
-		Future<Integer[]> temp = null;
 		mo.getDeviceManager().getDeviceInfo().getGpioPinDevice("LED").setValues(12);
 		mo.getDeviceManager().getDeviceInfo().getGpioPinDevice("COOLER").setValues(1);
 		mo.getDeviceManager().getDeviceInfo().getGpioPinDevice("HEATER").setValues(1);
@@ -71,9 +67,7 @@ public class MonitorTest {
 			mo.getDeviceManager().generateGpioPinDevice("HEATER");
 			mo.getDeviceManager().generateGpioPinDevice("SERVOMOTOR");
 			mo.getDeviceManager().generateGpioPinDevice("STEPPERMOTOR");
-			temp = mo.getDeviceManager().generateSpiPinDevice("MCP3008");
-			System.out.println("MCP3008 number 0: "+temp.get()[0]);
-			System.out.println("MCP3008 number 1: "+temp.get()[1]);
+			mo.getDeviceManager().generateSpiPinDevice("MCP3008");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,10 +98,11 @@ public class MonitorTest {
 	public void test5_dbUpToDataInDatabase() throws Exception {
 		System.out.println("test_5_start");
 		mo.getDeviceManager().getDeviceInfo().getSpiPinDevice("MCP3008").initDatachannel(2,0,7);
-		Future<Integer[]> temp = mo.getDeviceManager().generateSpiPinDevice("MCP3008");
-		Integer[] abc = temp.get();
-		mo.getNetworkController().getDc().setLevel(String.valueOf(abc[0].intValue()));
-		mo.getNetworkController().getDc().setTemp(String.valueOf(abc[1].intValue()));
+		mo.getDeviceManager().generateSpiPinDevice("MCP3008");
+		int a = mo.getDeviceManager().getDeviceInfo().getSpiPinDevice("MCP3008").getData(0);
+		int b = mo.getDeviceManager().getDeviceInfo().getSpiPinDevice("MCP3008").getData(7);
+		mo.getNetworkController().getDc().setLevel(String.valueOf(a));
+		mo.getNetworkController().getDc().setTemp(String.valueOf(b));
 		mo.getNetworkController().getDc().upToDataInDatabase();
 //		mo.getNetworkController().getDc().setMessage("upToData");
 //		mo.getScheduledExecutorService().submit(mo.getNetworkController().getDc());
@@ -118,9 +113,7 @@ public class MonitorTest {
 	@Test
 	public void test6_httpConnection() throws InterruptedException, ExecutionException {
 		System.out.println("test_6_start");
-		Future<String> s = mo.getScheduledExecutorService().submit(mo.getNetworkController().getReceiver());
-		String str = s.get();
-		System.out.println(str);
+		mo.getScheduledExecutorService().submit(mo.getNetworkController().getReceiver());
 		System.out.println("test_6_end");
 	}
 	

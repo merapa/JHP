@@ -1,13 +1,14 @@
 package network;
 
-import java.util.concurrent.Callable;
+public class Sender implements Runnable{
 
-public class Sender implements Callable<String>{
-
+	public Sender(String url) {
+		
+	}
 	
 	@Override
-	public String call() throws Exception {
-		return null;
+	public void run() {
+		
 	}
 	
 }

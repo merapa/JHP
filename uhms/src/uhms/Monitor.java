@@ -13,7 +13,7 @@ public class Monitor {
 	
 	public Monitor() {
 		this.ses = Executors.newScheduledThreadPool(10);
-		this.nc = new NetworkController(this, this.ses);
+		this.nc = new NetworkController(this);
 		this.dm = new DeviceManager(this, this.ses);
 	}
 
@@ -25,11 +25,11 @@ public class Monitor {
 	
 	private void listView() {
 		System.out.println();
-		System.out.println("목록");
-		System.out.println("1. 로그보기");
-		System.out.println("2. 현재 핀 설정");
-		System.out.println("3. 직접 제어하기");
-		System.out.println("4. 프로그램 종료");
+		System.out.println("紐⑸줉");
+		System.out.println("1. 濡쒓렇蹂닿린");
+		System.out.println("2. �쁽�옱 �� �꽕�젙");
+		System.out.println("3. 吏곸젒 �젣�뼱�븯湲�");
+		System.out.println("4. �봽濡쒓렇�옩 醫낅즺");
 		System.out.println();
 	}
 	
@@ -39,11 +39,11 @@ public class Monitor {
 		this.runbackgroundTask();
 		while((line = scan.nextLine()) != null) {
 			if(line.equals("1")) {
-				System.out.println("1 출력");
+				System.out.println("1 異쒕젰");
 			} else if (line.equals("2")) {
-				System.out.println("2 출력");
+				System.out.println("2 異쒕젰");
 			} else if (line.equals("3")) {
-				System.out.println("3 출력");
+				System.out.println("3 異쒕젰");
 			} else if (line.equals("4")) {
 				break;
 			} else {

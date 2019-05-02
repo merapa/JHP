@@ -10,18 +10,16 @@ public class DeviceManager implements Runnable{
 	private Monitor mo = null;
 	private DeviceInfo di = null;
 	private EcologicalEnvironment ee = null;
-	private ScheduledExecutorService ses = null;
 	private String[] command = null;
 	
 	public DeviceManager(Monitor mo, ScheduledExecutorService ses) {
 		this.mo = mo;
 		this.di = new DeviceInfo("./config/deviceConfig");
 		this.ee = new EcologicalEnvironment(this);
-		this.ses = ses;
 		
 		DBComunicator dbc = this.mo.getNetworkController().getDc();
 		dbc.setMessage("getOperateData");
-		Future<String[]> temp = this.ses.submit(this.mo.getNetworkController().getDc());
+		Future<String[]> temp = this.mo.getScheduledExecutorService().submit(this.mo.getNetworkController().getDc());
 		String[] values = null;
 		try {
 			values = temp.get();
@@ -38,13 +36,11 @@ public class DeviceManager implements Runnable{
 	}
 	
 	public void generateGpioPinDevice(String command) throws Exception {
-		this.ses.submit(this.di.getGpioPinDevice(command));
+		this.mo.getScheduledExecutorService().submit(this.di.getGpioPinDevice(command));
 	}
 	
-	public Future<Integer[]> generateSpiPinDevice(String command) throws Exception {
-		Future<Integer[]> result = null;
-		result = this.ses.submit(this.di.getSpiPinDevice(command));
-		return result;
+	public void generateSpiPinDevice(String command) throws Exception {
+		this.mo.getScheduledExecutorService().submit(this.di.getSpiPinDevice(command));
 	}
 	
 	public Monitor getMo() {
@@ -54,11 +50,7 @@ public class DeviceManager implements Runnable{
 	public DeviceInfo getDeviceInfo() {
 		return this.di;
 	}
-	
-	public ScheduledExecutorService getScheduledExecutorService() {
-		return this.ses;
-	}
-	
+		
 	public void setCommand(String[] command) {
 		this.command = command;
 	}
@@ -77,10 +69,7 @@ public class DeviceManager implements Runnable{
 				} else if(this.command[0].toUpperCase().equals("EXIT")){
 					break;
 				}
-				Future<Integer[]> current = this.generateSpiPinDevice("MCP3008");
-				Integer[] values = current.get();
-				this.ee.checkTo(values[0].intValue(),values[1].intValue());
-				this.command = null;
+				this.generateSpiPinDevice("MCP3008");
 			} catch (Exception e) {
 				e.printStackTrace();
 				break;

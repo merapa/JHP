@@ -8,6 +8,7 @@ import com.pi4j.io.spi.impl.SpiDeviceImpl;
 
 public class Mcp3008 extends SpiPinDevice {
 	private SpiDeviceImpl sdi = null;
+	private int[] values = new int[8];
 
 	@Override
 	public void init(SpiChannel channel, SpiMode mode) {
@@ -44,12 +45,17 @@ public class Mcp3008 extends SpiPinDevice {
 	}
 
 	@Override
-	public Integer[] call() throws Exception {
-		Integer[] temp = new Integer[super.getDatachannel().length];
+	public void run() {
 		for(int i=0; i<super.getDatachannel().length; i++) {
-			temp[i] = this.getData(super.getDatachannel()[i]);
+			if(super.getDatachannel()[i] > 0) {
+				try {
+					this.values[i] = this.getData(super.getDatachannel()[i]);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		temp[1] = (int)(5.0*temp[1].intValue()*100.0 /1024);//channel 7's lm35
-		return temp;
+		this.values[0] = (int)(5.0*this.values[0]*100.0 /1024);//channel 7's lm35
 	}
+
 }
