@@ -22,33 +22,33 @@ public class MemberDAO {
 			con = DriverManager.getConnection(dbURL,dbID,dbPass);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} // mysql Á¢¼Ó ÇØÁÖ´Â ºÎºĞ
+		} // mysql ì ‘ì† í•´ì£¼ëŠ” ë¶€ë¶„
 	}
 	
 // -------------------------------------------------------------------------
-	// ·Î±×ÀÎ 
-	public int login(String Id, String Pass) { // ID SQL º¸°í È®ÀÎ ÇÏ±â
-		String SQL = "select pass from user where = ID = ?";
+	// ë¡œê·¸ì¸ 
+	public int login(String Id, String Pass) { // ID SQL ë³´ê³  í™•ì¸ í•˜ê¸°
+		String SQL = "select pass from user where ID = ?";
 	try {
 		ps = con.prepareStatement(SQL);
 		ps.setString(1,Id);
 		rs = ps.executeQuery();
 		if(rs.next()) {
 			if(rs.getString(1).equals(Pass)) 
-				return 1; // ·Î±×ÀÎ ¼º°ø
+				return 1; // ë¡œê·¸ì¸ ì„±ê³µ
 			else
-					return 0; // ºñ¹Ğ¹øÈ£ ºÒÀÏÄ¡
+					return 0; // ë¹„ë°€ë²ˆí˜¸ ë¶ˆì¼ì¹˜
 			}
-		return -1; // ¾ÆÀÌµğ ¾øÀ»¶§
+		return -1; // ì•„ì´ë”” ì—†ì„ë•Œ
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
-	return -2; // µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+	return -2; // ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 }
 
 
 // -------------------------------------------------------------------------
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	
 	public int join(MemberDTO dto) {
 		String SQL= "insert into user values (?,?,?,?,?)";
@@ -61,7 +61,7 @@ public class MemberDAO {
 		}catch(Exception e) {
 				e.printStackTrace();
 		}
-		return -1; // µ¥ÀÌÅÍ ¿À·ù
+		return -1; // ë°ì´í„° ì˜¤ë¥˜
 	}
 	
 	
