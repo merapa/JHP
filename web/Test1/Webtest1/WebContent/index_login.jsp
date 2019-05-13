@@ -3,13 +3,12 @@
     <%@ page import="java.sql.*"%>
 	<%@ page import="javax.sql.*" %>
 	<%@ page import="javax.naming.*" %>
-	<%@ page import="java.io.PrintWriter" %>
 	
 <% 
-	String Id =null;
-	if(session.getAttribute("Id")!=null){
-		Id = (String) session.getAttribute("Id");
-	}
+	request.setCharacterEncoding("UTF-8");
+	String id =(String)session.getAttribute("id");
+	String pass=request.getParameter("pass");
+	String admin=request.getParameter("pass");
 %>
 
 
