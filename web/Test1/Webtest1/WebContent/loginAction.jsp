@@ -1,56 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
     <%@ page import="dao.MemberDAO" %>
     <%@ page import="java.io.PrintWriter" %>
-  <% request.setCharcterEncoding("UTF-8"); %>
+     <% request.setCharacterEncoding("UTF-8"); %>
     <jsp:useBean id="user" class="dto.MemberDTO" scope="page"/>
-    <jsp:setProperty name="user" property="Id" />
-    <jsp:setProperty name="user" property="Pass" />
+    <jsp:setProperty name="user" property="id" />
+    <jsp:setProperty name="user" property="pass" />
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 <%
 	String Id= null;
-	if(session.getAttribute("Id") != null){
-		Id = (String) session.getAttribute("Id");
+	if(session.getAttribute("id") != null){
+		Id = (String) session.getAttribute("id");
 	} if (Id != null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ÀÌ¹Ì ·Î±×ÀÎÀÌ µÇ¾îÀÖ½À´Ï´Ù.')");
-		script.println("location.href = 'index_login'");
+		script.println("alert('ì´ë¯¸ ë¡œê·¸ì¸ì´ ë˜ì–´ìˆìŠµë‹ˆë‹¤.')");
+		script.println("location.href = 'index_login.jsp'");
 		script.println("</script>");
 	}
 	MemberDAO dao = new MemberDAO();
+	
 	int result = dao.login(user.getId(),user.getPass());
 	if (result == 1){
-		session.setAttribute("Id",user.getId());
+		session.setAttribute("id",user.getId());
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("location.href = 'index_login'");
+		script.println("location.href = 'index_login.jsp'");
 		script.println("</script>");
 	}
 	else if (result == 0 ){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ºñ¹Ğ¹øÈ£°¡ Æ²·È½À´Ï´Ù')");
+		script.println("alert('ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë ¸ìŠµë‹ˆë‹¤')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
 	else if (result == -1 ){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù.')");
+		script.println("alert('ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤.')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
 	else if (result == -2 ){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('¿À·ù ¹ß»ı.')");
+		script.println("alert('ì˜¤ë¥˜ ë°œìƒ.')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
