@@ -2,17 +2,15 @@ package uhms;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
 import network.DBComunicator;
 
-public class DeviceManager implements Runnable{
+public class DeviceManager {
 	
 	private Monitor mo = null;
 	private DeviceInfo di = null;
 	private EcologicalEnvironment ee = null;
-	private String[] command = null;
 	
-	public DeviceManager(Monitor mo, ScheduledExecutorService ses) {
+	public DeviceManager(Monitor mo) {
 		this.mo = mo;
 		this.di = new DeviceInfo("./config/deviceConfig");
 		this.ee = new EcologicalEnvironment(this);
@@ -36,11 +34,11 @@ public class DeviceManager implements Runnable{
 	}
 	
 	public void generateGpioPinDevice(String command) throws Exception {
-		this.mo.getScheduledExecutorService().submit(this.di.getGpioPinDevice(command));
+		this.mo.getScheduledExecutorService().execute(this.di.getGpioPinDevice(command));
 	}
 	
 	public void generateSpiPinDevice(String command) throws Exception {
-		this.mo.getScheduledExecutorService().submit(this.di.getSpiPinDevice(command));
+		this.mo.getScheduledExecutorService().execute(this.di.getSpiPinDevice(command));
 	}
 	
 	public Monitor getMo() {
@@ -51,29 +49,8 @@ public class DeviceManager implements Runnable{
 		return this.di;
 	}
 		
-	public void setCommand(String[] command) {
-		this.command = command;
-	}
-
 	public void shutdown() {
 		this.di.shutdown();
 	}
 
-	@Override
-	public void run() {
-		while(true) {
-			try{
-				if(this.command != null){
-					this.getDeviceInfo().getGpioPinDevice(this.command[0].toUpperCase()).setValues(Integer.parseInt(this.command[1]));
-					this.generateGpioPinDevice(this.command[0].toUpperCase());
-				} else if(this.command[0].toUpperCase().equals("EXIT")){
-					break;
-				}
-				this.generateSpiPinDevice("MCP3008");
-			} catch (Exception e) {
-				e.printStackTrace();
-				break;
-			}
-		}
-	}
 }

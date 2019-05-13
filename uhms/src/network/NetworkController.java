@@ -2,7 +2,7 @@ package network;
 
 import uhms.Monitor;
 
-public class NetworkController implements Runnable{
+public class NetworkController {
 	
 	private Monitor mo = null;
 	private Receiver receiver = null;
@@ -44,7 +44,4 @@ public class NetworkController implements Runnable{
 		return this.mo;
 	}
 
-	@Override
-	public void run() {
-	}
 }

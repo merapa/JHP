@@ -27,7 +27,7 @@ public abstract class GpioPinDevice implements Operable, Runnable {
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
-
+	
 	@Override
 	public void runDevice(int value) {}
 

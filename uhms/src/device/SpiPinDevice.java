@@ -12,9 +12,11 @@ public abstract class SpiPinDevice implements Runnable{
 	private int[] Datachannel = null;
 	private String deviceId = null;
 
-	public void init(SpiChannel channel, SpiMode mode) {
+	public void init(SpiChannel channel, SpiMode mode, int channelLength, String deviceId){
 		try {
-			this.setSdi(new SpiDeviceImpl(channel,mode));
+			this.sdi = new SpiDeviceImpl(channel,mode);
+			this.Datachannel = new int[channelLength];
+			this.deviceId = deviceId;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -24,33 +26,12 @@ public abstract class SpiPinDevice implements Runnable{
 		return sdi;
 	}
 
-	public void setSdi(SpiDeviceImpl sdi) {
-		this.sdi = sdi;
-	}
-
-	public int[] getDatachannel() {
+	public int[] getchannel() {
 		return this.Datachannel;
 	}
-
-	public void setDatachannel(int index, int channel) {
-		this.Datachannel[index] = channel;
-	}
-
+	
 	public String getDeviceId() {
 		return deviceId;
-	}
-
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
-	}
-
-	public void initDatachannel(int channelLength,int... channels) {
-		this.Datachannel = new int[channelLength];
-		int i =0;
-		for(int value : channels) {
-			this.Datachannel[i] = value;
-			i++;
-		}
 	}
 
 	public abstract int getData(int channel) throws IOException;

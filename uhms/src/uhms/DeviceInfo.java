@@ -101,10 +101,9 @@ public class DeviceInfo {
 					this.gpd.put(line[0], gdevice);
 					this.gpd.get(line[0]).init(gpins);
 					this.gpd.get(line[0]).setDeviceId(line[0]);
-				} else if (sdevice != null) {
+				} else if (sdevice != null && line[0].equals("MCP3008")) {
 					this.spd.put(line[0],sdevice);
-					this.spd.get(line[0]).init(SpiChannel.CS0, SpiMode.MODE_0);
-					this.spd.get(line[0]).setDeviceId(line[0]);
+					this.spd.get(line[0]).init(SpiChannel.CS0, SpiMode.MODE_0, 8, line[0]);
 				}
 				sdevice = null;
 				gdevice = null;
