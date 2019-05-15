@@ -48,7 +48,7 @@
 		script.println("history.back()");
 		script.println("</script>");
 	}
-	else if (result == 0 ){ // 가입 성공
+	else { // 가입 성공
 		session.setAttribute("Id",user.getId());
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
