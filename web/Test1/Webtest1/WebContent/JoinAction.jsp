@@ -41,7 +41,7 @@
 	}else {
 		MemberDAO dao = new MemberDAO();
 	int result = dao.join(user); // 자바 jsp:bean 쪽 user 네임 따오는거임 
-	if (result == 1){
+	if (result == -1){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('이미 존재하는 아이디 입니다.')");
@@ -52,6 +52,7 @@
 		session.setAttribute("Id",user.getId());
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
+		script.println("alert('가입 성공.')");
 		script.println("location.href ='loginFrom.jsp'");
 		script.println("</script>");
 	}
