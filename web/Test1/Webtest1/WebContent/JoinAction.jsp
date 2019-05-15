@@ -26,7 +26,7 @@
 	} if (Id != null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ÀÌ¹Ì ·Î±×ÀÎÀÌ µÇ¾îÀÖ½À´Ï´Ù.')");
+		script.println("alert('ì´ë¯¸ ë¡œê·¸ì¸ì´ ë˜ì–´ìˆìŠµë‹ˆë‹¤.')");
 		script.println("location.href = 'index_login'");
 		script.println("</script>");
 	}
@@ -35,29 +35,29 @@
 	|| user.getName() == null || user.getEmail() == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ÀÔ·ÂÀÌ ¾È µÈ »çÇ×ÀÌ ÀÖ½À´Ï´Ù.')");
+		script.println("alert('ì…ë ¥ì´ ì•ˆ ëœ ì‚¬í•­ì´ ìˆìŠµë‹ˆë‹¤.')");
 		script.println("history.back()");
 		script.println("</script>");
 	}else {
-		
-	}
-
-	MemberDAO dao = new MemberDAO();
+		MemberDAO dao = new MemberDAO();
 	int result = dao.join(user);
 	if (result == 1){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ÀÌ¹Ì Á¸ÀçÇÏ´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù.')");
+		script.println("alert('ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤.')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
-	else if (result == 0 ){ // °¡ÀÔ ¼º°ø
+	else if (result == 0 ){ // ê°€ì… ì„±ê³µ
 		session.setAttribute("Id",user.getId());
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("location.href ='loginFrom.jsp'");
 		script.println("</script>");
 	}
+}
+
+	
 
 
 %>
