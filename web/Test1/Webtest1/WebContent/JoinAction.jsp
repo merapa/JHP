@@ -40,7 +40,7 @@
 		script.println("</script>");
 	}else {
 		MemberDAO dao = new MemberDAO();
-	int result = dao.join(user);
+	int result = dao.join(user); // 자바 jsp:bean 쪽 user 네임 따오는거임 
 	if (result == 1){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
