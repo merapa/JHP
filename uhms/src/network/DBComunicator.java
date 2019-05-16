@@ -9,8 +9,11 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.concurrent.Callable;
 
+import uhms.Monitor;
+
 public class DBComunicator implements Callable<String[]>{
 	
+	private Monitor mo = null;
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -18,7 +21,8 @@ public class DBComunicator implements Callable<String[]>{
 	private String temp = null;
 	private String level = null;
 	
-	public DBComunicator() {
+	public DBComunicator(Monitor mo) {
+		this.mo = mo;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.con = DriverManager.getConnection("jdbc:mysql://iotmit.iptime.org:3308/JHP?useSSL=false&verifyServerCertificate=false","raspberrypi","1234");

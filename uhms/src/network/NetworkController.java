@@ -8,12 +8,14 @@ public class NetworkController {
 	private Receiver receiver = null;
 	private Sender sender = null;
 	private DBComunicator dc = null;
+	private CommandInterpreter ci = null;
 	
 	public NetworkController(Monitor mo) {
 		this.mo = mo;
-		this.receiver = new Receiver();
-		this.sender = new Sender("");
-		this.dc = new DBComunicator();
+		this.receiver = new Receiver(this.mo);
+		this.sender = new Sender(this.mo);
+		this.dc = new DBComunicator(this.mo);
+		this.ci = new CommandInterpreter();
 	}
 
 	public Receiver getReceiver() {
