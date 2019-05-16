@@ -22,4 +22,7 @@ public class Receiver {
 		}
 	}
 	
+	public void setMessage(String message, String[] data) {
+		this.ch.setMessage(message, data);
+	}
 }
